@@ -8,26 +8,26 @@
 ** Setup repository in org file
 In the following code block, we will initialize package repositories and after that install ~use-package~. This package is used to install other packages.
 
- #+BEGIN_SRC emacs-lisp
- (require 'package)
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
 
- (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                          ("elpa" . "https://elpa.gnu.org/packages/")
-			  ("org" . "https://orgmode.org/elpa/")
- ))
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+						   ("elpa" . "https://elpa.gnu.org/packages/")
+						   ("org" . "https://orgmode.org/elpa/")
+						   ))
 
 
- (package-initialize)
+  (package-initialize)
 
- ; Fetch the list of packages available 
- (unless package-archive-contents (package-refresh-contents))
+										  ; Fetch the list of packages available 
+  (unless package-archive-contents (package-refresh-contents))
 
- ; Install use-package
- (setq package-list '(use-package))
- (dolist (package package-list)
- (unless (package-installed-p package) (package-install package)))
+										  ; Install use-package
+  (setq package-list '(use-package))
+  (dolist (package package-list)
+	(unless (package-installed-p package) (package-install package)))
 
- #+END_SRC
+#+END_SRC
 
 ** Environment Setup
 In some operating systems Emacs does not load environment variables properly. Therefore, below we install a package called ~exec-path-from-shell~ and initialize it.
@@ -261,6 +261,19 @@ We can use quickrun package to execute code (if it has main). E.g. If you have a
 :bind ("C-c r" . quickrun))
 #+end_src
 
+** Magit
+A VC plugin that has github integrations
+#+begin_src emacs-lisp
+  (use-package magit :ensure t)
+  (use-package magit-gh-pulls :ensure t)  
+#+end_src
+** Other packages
+
+#+begin_src emacs-lisp
+  (use-package slime :ensure t)
+  (use-package nix-mode :ensure t)
+#+end_src
+
 * Language Server Protocol (LSP)
   With above setup done, below we will setup several packages closely related to LSP.
 
@@ -385,10 +398,12 @@ You can start LSP server in a java project by using ~C-c l s s~. Once you type ~
 ** LSP Java
 This is the package that handles server installation and session management.
 #+begin_src  emacs-lisp
-(use-package lsp-java 
-:ensure t
-:config (add-hook 'java-mode-hook 'lsp))
+  (use-package lsp-java 
+  :ensure t
+  :config (add-hook 'java-mode-hook 'lsp))
+  (setq lsp-java-workspace-dir "/home/ivvil/Documentos/Eclipse")
 #+end_src
 
 * Conclusion
 Go through [[https://github.com/emacs-lsp/lsp-java#supported-commands][Supported commands]] section of lsp-java github page to see commands provided in lsp-mode. Most of these commands are available under lsp's ~C-c l~ option. I hope this configuration file was useful.
+
