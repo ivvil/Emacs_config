@@ -265,7 +265,6 @@ We can use quickrun package to execute code (if it has main). E.g. If you have a
 A VC plugin that has github integrations
 #+begin_src emacs-lisp
   (use-package magit :ensure t)
-  (use-package magit-gh-pulls :ensure t)  
 #+end_src
 ** Other packages
 
