@@ -257,3 +257,10 @@
 :ensure t
 :config (add-hook 'java-mode-hook 'lsp))
 (setq lsp-java-workspace-dir "/home/ivvil/Documentos/Eclipse")
+
+(add-hook 'html-mode-hook 'lsp)
+
+(add-hook 'js-mode-hook 'lsp)
+
+(use-package geiser-guile :ensure t)
+(use-package ac-geiser :ensure t)
