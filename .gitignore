@@ -56,3 +56,16 @@ build/
 ### VS Code ###
 .vscode/
 
+# Emacs cache files
+
+cache/
+.cache/
+elpa/
+eln-cache/
+workspace/
+.lsp-session-v1
+recentf
+tramp
+transient/history.el
+%backup%~
+
