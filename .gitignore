@@ -68,4 +68,5 @@ recentf
 tramp
 transient/history.el
 %backup%~
-
+.dap-breakpoints
+eshell/

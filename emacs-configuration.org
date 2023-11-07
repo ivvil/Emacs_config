@@ -188,7 +188,7 @@ Helm allows for easy completion of commands. Below, we will replace several of t
 
 I want to point out, couple of interesting things from above setup. Just like we added ~C-c p~ as a prefix for projectile, here we added ~C-c h~ for helm. We also enabled fuzzy matching, so that your search text don't need to be very strict. Also, I added ~C-c g~ to helm-grep-do-git-grep. I can search files with specific text within a git project (make sure to commit it first).
 
-** Helm Descbinds
+*** Helm Descbinds
 Helm descbinds helps to easily search for keyboard shortcuts for modes that are currently active in the project. This can be helpful to discover keyboard shortcuts to various commands. Use ~C-h b~ to bring up helm-descbinds window.
 
 #+begin_src emacs-lisp
@@ -199,7 +199,7 @@ Helm descbinds helps to easily search for keyboard shortcuts for modes that are 
 
 E.g. In helm-descbinds window you could type "helm" and "projectile" and see all the shortcuts assigned to various commands.
 
-** Helm swoop
+*** Helm swoop
 Helm swoop allows to quickly search for text under cursor or new text within current file. I am sure you are already using ~C-s~ and ~C-r~ to search within the file. This package compliments rather than replace it. You can quickly type ~js~ to search and jump to the target line. To go back to where you started searching, use ~jp~. You can use ~M-m~ from ~C-s~ and ~C-r~ search to start using helm-swoop as described in below setting.
 
 #+begin_src emacs-lisp
@@ -230,6 +230,13 @@ Helm swoop allows to quickly search for text under cursor or new text within cur
 (setq helm-swoop-move-to-line-cycle t)
 
 )
+#+end_src
+
+*** Helm tramp
+Helm tramp allows ~TRAMP~ autocompletion. 
+
+#+begin_src emacs-lisp
+  (use-package helm-tramp :ensure t)
 #+end_src
 
 ** Avy Goto

@@ -160,6 +160,8 @@
 
 )
 
+(use-package helm-tramp :ensure t)
+
 (use-package avy 
 :ensure t
 :chords
