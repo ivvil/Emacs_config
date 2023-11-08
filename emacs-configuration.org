@@ -311,20 +311,20 @@ FlyCheck checks for errors in code at run-time.
 Emacs Debug Adapter Protocol aka DAP Mode allows us to debug your program. Below we will integrate ~dap-mode~ with ~dap-hydra~. ~Dap-hydra~ shows keys you can use to enable various options and jump through code at runtime. After we install dap-mode we will also install ~dap-java~.
 
 #+begin_src emacs-lisp
-(use-package dap-mode
-  :ensure t
-  :after (lsp-mode)
-  :functions dap-hydra/nil
-  :config
-  (require 'dap-java)
-  :bind (:map lsp-mode-map
-         ("<f5>" . dap-debug)
-         ("M-<f5>" . dap-hydra))
-  :hook ((dap-mode . dap-ui-mode)
-    (dap-session-created . (lambda (&_rest) (dap-hydra)))
-    (dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))
+  (use-package dap-mode
+	:ensure t
+	:after (lsp-mode)
+	:functions dap-hydra/nil
+	:config
+	(require 'dap-java)
+	:bind (:map lsp-mode-map
+		   ("<f5>" . dap-debug)
+		   ("M-<f5>" . dap-hydra))
+	:hook ((dap-mode . dap-ui-mode)
+	  (dap-session-created . (lambda (&_rest) (dap-hydra)))
+	  (dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))
 
-(use-package dap-java :ensure nil)
+  (use-package dap-java :ensure nil)
 #+end_src
 
 ** Treemacs
@@ -378,25 +378,26 @@ LSP's built in symbol explorer uses ~xref-find-apropos~ to provide symbol naviga
 Let's install the main package for lsp. Here we will integrate lsp with which-key. This way, when we type the prefix key ~C-c l~ we get additional help for completing the command. 
 
 #+begin_src emacs-lisp
-(use-package lsp-mode
-:ensure t
-:hook (
-   (lsp-mode . lsp-enable-which-key-integration)
-   (java-mode . #'lsp-deferred)
-)
-:init (setq 
-    lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
-    lsp-enable-file-watchers nil
-    read-process-output-max (* 1024 1024)  ; 1 mb
-    lsp-completion-provider :capf
-    lsp-idle-delay 0.500
-)
-:config 
-    (setq lsp-intelephense-multi-root nil) ; don't scan unnecessary projects
-    (with-eval-after-load 'lsp-intelephense
-    (setf (lsp--client-multi-root (gethash 'iph lsp-clients)) nil))
-	(define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
-)
+  (use-package lsp-mode
+  :ensure t
+  :hook (
+	 (lsp-mode . lsp-enable-which-key-integration)
+	 (java-mode . #'lsp-deferred)
+	 (latex-mode . #'lsp-deferred)
+  )
+  :init (setq 
+	  lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
+	  lsp-enable-file-watchers nil
+	  read-process-output-max (* 1024 1024)  ; 1 mb
+	  lsp-completion-provider :capf
+	  lsp-idle-delay 0.500
+  )
+  :config 
+	  (setq lsp-intelephense-multi-root nil) ; don't scan unnecessary projects
+	  (with-eval-after-load 'lsp-intelephense
+	  (setf (lsp--client-multi-root (gethash 'iph lsp-clients)) nil))
+	  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+  )
 #+end_src
 
 You can start LSP server in a java project by using ~C-c l s s~. Once you type ~C-c l~ ~which-key~ package should guide you through rest of the options. In above setting I have added some memory management settings as suggested in [[https://emacs-lsp.github.io/lsp-mode/page/performance/][this guide]]. Change them to higher numbers, if you find *lsp-mode* sluggish in your computer.
@@ -432,6 +433,14 @@ Pakcages for other languages and hooks
 #+begin_src emacs-lisp
   (use-package geiser-guile :ensure t)
   (use-package ac-geiser :ensure t)  
+#+end_src
+
+** Latex
+
+#+begin_src emacs-lisp
+  (use-package auctex :ensure t :hook (latex-mode . acutex-mode))
+  (use-package company-auctex :ensure t)
+  (use-package auto-complete-auctex :ensure t)
 #+end_src
 
 * Conclusion
