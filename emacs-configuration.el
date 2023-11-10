@@ -181,8 +181,7 @@
 
 (use-package magit :ensure t)
 
-(use-package slime :ensure t)
-(use-package nix-mode :ensure t)
+(use-package envrc :ensure t)
 
 (use-package company :ensure t)
 
@@ -265,9 +264,14 @@
 
 (add-hook 'js-mode-hook 'lsp)
 
+(use-package slime :ensure t)
+(setq inferior-lisp-program "sbcl")
+
 (use-package geiser-guile :ensure t)
 (use-package ac-geiser :ensure t)
 
 (use-package auctex :ensure t :hook (latex-mode . acutex-mode))
 (use-package company-auctex :ensure t)
 (use-package auto-complete-auctex :ensure t)
+
+(use-package nix-mode :ensure t)

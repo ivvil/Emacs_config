@@ -8,6 +8,8 @@
 ;; All the settings and package installation is set in configuration.org
 (org-babel-load-file "~/.emacs.d/emacs-configuration.org")
 
+(envrc-global-mode)
+
 (add-hook 'emacs-startup-hook
   (lambda ()
     (setq gc-cons-threshold 300000000 ; 300mb	
