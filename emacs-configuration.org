@@ -1,4 +1,5 @@
-#+TITLE: Java Programming in Emacs
+#+TITLE: ivvil's emacs config
+
 * Introduction
   This configuration file contains setup of Emacs packages for Language Server Protocol (LSP). I will use ~use-package~ for package management.
 * Setup
@@ -457,6 +458,12 @@ Pakcages for other languages and hooks
 
 #+begin_src emacs-lisp
   (use-package nix-mode :ensure t)
+#+end_src
+
+** Rust
+
+#+begin_src emacs-lisp
+  (use-package rust-mode :ensure t)
 #+end_src
 
 * Conclusion

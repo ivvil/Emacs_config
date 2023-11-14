@@ -276,3 +276,5 @@
 (setq-default TeX-engine 'XeTeX)
 
 (use-package nix-mode :ensure t)
+
+(use-package rust-mode :ensure t)
