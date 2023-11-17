@@ -450,6 +450,7 @@ Pakcages for other languages and hooks
   (use-package auctex :ensure t :hook (latex-mode . acutex-mode))
   (use-package company-auctex :ensure t)
   (use-package auto-complete-auctex :ensure t)
+  (setq-default TeX-engine 'XeTeX)
 #+end_src
 
 ** Nix

@@ -14,7 +14,7 @@
 										; Install use-package
 (setq package-list '(use-package))
 (dolist (package package-list)
-      (unless (package-installed-p package) (package-install package)))
+  (unless (package-installed-p package) (package-install package)))
 
 (use-package exec-path-from-shell :ensure t)
 (exec-path-from-shell-initialize)
@@ -191,15 +191,15 @@
 (use-package flycheck :ensure t :init (global-flycheck-mode))
 
 (use-package dap-mode
-      :ensure t
-      :after (lsp-mode)
-      :functions dap-hydra/nil
-      :config
-      (require 'dap-java)
-      :bind (:map lsp-mode-map
+  :ensure t
+  :after (lsp-mode)
+  :functions dap-hydra/nil
+  :config
+  (require 'dap-java)
+  :bind (:map lsp-mode-map
 		 ("<f5>" . dap-debug)
 		 ("M-<f5>" . dap-hydra))
-      :hook ((dap-mode . dap-ui-mode)
+  :hook ((dap-mode . dap-ui-mode)
 	(dap-session-created . (lambda (&_rest) (dap-hydra)))
 	(dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))
 
@@ -237,9 +237,9 @@
 (use-package lsp-mode
 :ensure t
 :hook (
-       (lsp-mode . lsp-enable-which-key-integration)
-       (java-mode . #'lsp-deferred)
-       (latex-mode . #'lsp-deferred)
+   (lsp-mode . lsp-enable-which-key-integration)
+   (java-mode . #'lsp-deferred)
+   (latex-mode . #'lsp-deferred)
 )
 :init (setq 
 	lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
@@ -273,5 +273,6 @@
 (use-package auctex :ensure t :hook (latex-mode . acutex-mode))
 (use-package company-auctex :ensure t)
 (use-package auto-complete-auctex :ensure t)
+(setq-default TeX-engine 'XeTeX)
 
 (use-package nix-mode :ensure t)
