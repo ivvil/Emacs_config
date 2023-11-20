@@ -5,16 +5,14 @@
 						 ("org" . "https://orgmode.org/elpa/")
 						 ))
 
-
 (package-initialize)
-
 										; Fetch the list of packages available 
 (unless package-archive-contents (package-refresh-contents))
 
 										; Install use-package
 (setq package-list '(use-package))
 (dolist (package package-list)
-  (unless (package-installed-p package) (package-install package)))
+      (unless (package-installed-p package) (package-install package)))
 
 (use-package exec-path-from-shell :ensure t)
 (exec-path-from-shell-initialize)
@@ -53,9 +51,9 @@
 
 (setq user-cache-directory (concat EMACS_DIR "cache"))
 (setq backup-directory-alist `(("." . ,(expand-file-name "backups" user-cache-directory)))
-      url-history-file (expand-file-name "url/history" user-cache-directory)
-      auto-save-list-file-prefix (expand-file-name "auto-save-list/.saves-" user-cache-directory)
-      projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" user-cache-directory))
+	      url-history-file (expand-file-name "url/history" user-cache-directory)
+	      auto-save-list-file-prefix (expand-file-name "auto-save-list/.saves-" user-cache-directory)
+	      projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" user-cache-directory))
 
 ;; Org-mode issue with src block not expanding
 ;; This is a fix for bug in org-mode where <s TAB does not expand SRC block
@@ -72,6 +70,9 @@
 
 ;; Highlight matching brackets and braces
 (show-paren-mode 1)
+
+;; Disable default startup buffer
+(setq inhibit-startup-screen t)
 
 (use-package doom-themes
 :ensure t 
@@ -183,23 +184,27 @@
 
 (use-package envrc :ensure t)
 
-(use-package company :ensure t)
+(use-package vterm :ensure t)
+(use-package eshell-vterm :ensure t)
+
+(use-package company :ensure t :init (global-company-mode))
 
 (use-package yasnippet :config (yas-global-mode))
 (use-package yasnippet-snippets :ensure t)
 
 (use-package flycheck :ensure t :init (global-flycheck-mode))
+(setq ispell-default-dicctionary "es")
 
 (use-package dap-mode
-  :ensure t
-  :after (lsp-mode)
-  :functions dap-hydra/nil
-  :config
-  (require 'dap-java)
-  :bind (:map lsp-mode-map
+      :ensure t
+      :after (lsp-mode)
+      :functions dap-hydra/nil
+      :config
+      (require 'dap-java)
+      :bind (:map lsp-mode-map
 		 ("<f5>" . dap-debug)
 		 ("M-<f5>" . dap-hydra))
-  :hook ((dap-mode . dap-ui-mode)
+      :hook ((dap-mode . dap-ui-mode)
 	(dap-session-created . (lambda (&_rest) (dap-hydra)))
 	(dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))
 
@@ -237,9 +242,9 @@
 (use-package lsp-mode
 :ensure t
 :hook (
-   (lsp-mode . lsp-enable-which-key-integration)
-   (java-mode . #'lsp-deferred)
-   (latex-mode . #'lsp-deferred)
+       (lsp-mode . lsp-enable-which-key-integration)
+       (java-mode . #'lsp-deferred)
+       (latex-mode . #'lsp-deferred)
 )
 :init (setq 
 	lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
@@ -264,8 +269,9 @@
 
 (add-hook 'js-mode-hook 'lsp)
 
-(use-package slime :ensure t)
+(use-package sly :ensure t)
 (setq inferior-lisp-program "sbcl")
+(add-hook 'common-lisp-hook 'company-mode)
 
 (use-package geiser-guile :ensure t)
 (use-package ac-geiser :ensure t)
@@ -278,3 +284,42 @@
 (use-package nix-mode :ensure t)
 
 (use-package rust-mode :ensure t)
+
+;;  ;;;; Code Completion
+
+;; (use-package corfu
+;;   ;; Optional customizations
+;;   :custom
+;;   (corfu-cycle t)                 ; Allows cycling through candidates
+;;   (corfu-auto t)                  ; Enable auto completion
+;;   (corfu-auto-prefix 2)
+;;   (corfu-auto-delay 0.3)
+;;   (corfu-popupinfo-delay '(0.5 . 0.2))
+;;   (corfu-preview-current 'insert) ; insert previewed candidate
+;;   (corfu-preselect 'prompt)
+;;   (corfu-on-exact-match nil)      ; Don't auto expand tempel snippets
+
+;;   ;; Optionally use TAB for cycling, default is `corfu-complete'.
+;;   :bind (:map corfu-map
+;; 			  ("M-SPC"      . corfu-insert-separator)
+;; 			  ("TAB"        . corfu-next)
+;; 			  ([tab]        . corfu-next)
+;; 			  ("S-TAB"      . corfu-previous)
+;; 			  ([backtab]    . corfu-previous)
+;; 			  ("S-<return>" . corfu-insert)
+;; 			  ("RET"        . nil))
+
+;;   :init
+;;   (global-corfu-mode)
+;;   (corfu-history-mode)
+;;   (corfu-popupinfo-mode) ; Popup completion info
+;;   :config
+;;   (add-hook 'eshell-mode-hook
+;; 			(lambda () (setq-local corfu-quit-at-boundary t
+;; 								   corfu-quit-no-match t
+;; 								   corfu-auto nil)
+;; 			  (corfu-mode))))
+
+(emms-all)
+(setq emms-player-list '(emms-player-mpv)
+	      emms-info-functions '(emms-info-native))
