@@ -324,4 +324,6 @@
 (require 'emms-player-mpd)
 (add-to-list 'emms-player-list 'emms-player-mpd)
 (setq emms-player-list '(emms-player-mpd)
-	      emms-info-functions '(emms-info-mpd))
+	  emms-info-functions '(emms-info-mpd)
+	  emms-change-volume-function '(emms-volume-mpd-change))
+(require 'emms-mpris)
