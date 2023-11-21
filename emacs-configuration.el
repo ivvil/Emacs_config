@@ -321,5 +321,7 @@
 ;; 			  (corfu-mode))))
 
 (emms-all)
-(setq emms-player-list '(emms-player-mpv)
-	      emms-info-functions '(emms-info-native))
+(require 'emms-player-mpd)
+(add-to-list 'emms-player-list 'emms-player-mpd)
+(setq emms-player-list '(emms-player-mpd)
+	      emms-info-functions '(emms-info-mpd))

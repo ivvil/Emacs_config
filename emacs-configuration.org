@@ -525,11 +525,14 @@ Testing corfu setup
 
 #+begin_src emacs-lisp
   (emms-all)
-  (setq emms-player-list '(emms-player-mpv)
-		emms-info-functions '(emms-info-native))
+  (require 'emms-player-mpd)
+  (add-to-list 'emms-player-list 'emms-player-mpd)
+  (setq emms-player-list '(emms-player-mpd)
+		emms-info-functions '(emms-info-mpd))
 #+end_src
 
 
 * Conclusion
 Go through [[https://github.com/emacs-lsp/lsp-java#supported-commands][Supported commands]] section of lsp-java github page to see commands provided in lsp-mode. Most of these commands are available under lsp's ~C-c l~ option. I hope this configuration file was useful.
+
 
