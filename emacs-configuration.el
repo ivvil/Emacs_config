@@ -283,7 +283,7 @@
 
 (use-package nix-mode :ensure t)
 
-(use-package rust-mode :ensure t)
+(use-package rust-mode :ensure t :hook (rust-mode . cargo-minor-mode))
 
 ;;  ;;;; Code Completion
 
@@ -320,6 +320,7 @@
 ;; 								   corfu-auto nil)
 ;; 			  (corfu-mode))))
 
+(use-package emms :ensure t)
 (emms-all)
 (require 'emms-player-mpd)
 (add-to-list 'emms-player-list 'emms-player-mpd)

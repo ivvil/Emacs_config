@@ -473,7 +473,7 @@ Pakcages for other languages and hooks
 ** Rust
 
 #+begin_src emacs-lisp
-  (use-package rust-mode :ensure t)
+  (use-package rust-mode :ensure t :hook (rust-mode . cargo-minor-mode))
 #+end_src
 
 * TESTING
@@ -524,6 +524,7 @@ Testing corfu setup
 ** EMMS
 
 #+begin_src emacs-lisp
+  (use-package emms :ensure t)
   (emms-all)
   (require 'emms-player-mpd)
   (add-to-list 'emms-player-list 'emms-player-mpd)

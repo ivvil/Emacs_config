@@ -70,3 +70,4 @@ transient/history.el
 %backup%~
 .dap-breakpoints
 eshell/
+emms/
