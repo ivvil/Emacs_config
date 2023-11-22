@@ -58,7 +58,7 @@
 ;; Org-mode issue with src block not expanding
 ;; This is a fix for bug in org-mode where <s TAB does not expand SRC block
 (when (version<= "9.2" (org-version))
-(require 'org-tempo))
+      (require 'org-tempo))
 
 ;; Coding specific setting
 
@@ -73,6 +73,13 @@
 
 ;; Disable default startup buffer
 (setq inhibit-startup-screen t)
+
+;; Enable disabled comands
+(setq disabled-command-function nil)
+
+(use-package s
+  :ensure t)
+(use-package which-linux-distribution)
 
 (use-package doom-themes
 :ensure t 
@@ -101,12 +108,12 @@
 )
 
 (use-package use-package-chords
-:ensure t
-:init 
-:config (key-chord-mode 1)
-(setq key-chord-two-keys-delay 0.4)
-(setq key-chord-one-key-delay 0.5) ; default 0.2
-)
+      :ensure t
+      :init 
+      :config (key-chord-mode 1)
+      (setq key-chord-two-keys-delay 0.4)
+      (setq key-chord-one-key-delay 0.5) ; default 0.2
+      )
 
 (use-package projectile 
 :ensure t
@@ -186,6 +193,41 @@
 
 (use-package vterm :ensure t)
 (use-package eshell-vterm :ensure t)
+
+;; (use-package emms
+;;   :config
+;;   (require 'emms-player-mpd)
+;;   (require 'emms-mpris)
+;;   (emms-all)
+;;   (setq emms-player-list emms-player-mpd)
+;;   (setq emms-info-functions 'emms-info-mpd)
+;;   (setq emms-change-volume-function 'emms-volume-mpd-change)
+;;   (fset emms-browser-covers 'emms-browser-cache-thumbnail)
+;;   (add-to-list 'emms-player-list 'emms-player-mpd))
+
+(emms-all)
+(emms-default-players)
+(emms-mode-line 1)
+
+(use-package emms-browser
+      :config
+      (setq emms-browser-covers 'emms-browser-cache-thumbnail)
+      (setq emms-browser-covers-for-first-column 'emms-browser-cache-thumbnail))
+
+(use-package emms-player-mpd
+      :config
+      (setq emms-player-list '(emms-player-mpd))
+      (setq emms-info-functions '(emms-info-mpd))
+      (setq emms-change-volume-function 'emms-volume-mpd-change)
+      (add-to-list 'emms-player-list 'emms-player-mpd))
+
+(use-package elcord :ensure t)
+(elcord-mode)
+
+(when (s-contains? "NixOS" which-linux-distribution) (fset 'bitlbee-command-line
+														       (lambda ()
+															 ((concat bitlbee-executable " " bitlbee-options " -d " bitlbee-user-directory)))))
+(use-package bitlbee :ensure t)
 
 (use-package company :ensure t :init (global-company-mode))
 
@@ -319,12 +361,3 @@
 ;; 								   corfu-quit-no-match t
 ;; 								   corfu-auto nil)
 ;; 			  (corfu-mode))))
-
-(use-package emms :ensure t)
-(emms-all)
-(require 'emms-player-mpd)
-(add-to-list 'emms-player-list 'emms-player-mpd)
-(setq emms-player-list '(emms-player-mpd)
-	  emms-info-functions '(emms-info-mpd)
-	  emms-change-volume-function '(emms-volume-mpd-change))
-(require 'emms-mpris)

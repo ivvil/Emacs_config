@@ -6,7 +6,7 @@ This configuration file contains setup of Emacs packages for Language Server Pro
   Since this is an org file, I am using ~org-babel-load-file~ command to load this file from [[init.el]] file. Emacs loads [[init.el]] when it starts. I have setup a variable called ~EMACS_DIR~ to point to *.emacs.d* as the setup directory. Adjust it to match your system. To speed up loading time of emacs, I have used ~gc-cons-threshold~ and ~gc-cons-percentage~ variables, before and after loading this configuration file. I have set ~gc-cons-threshold~ value to 300 mb after startup. Adjust it to comfortable value according to memory in your system. ~lsp-java~ package however has ~1GB~ setup as default.
   
 
-q** Setup repository in org file
+** Setup repository in org file
 In the following code block, we will initialize package repositories and after that install ~use-package~. This package is used to install other packages.
 
 #+BEGIN_SRC emacs-lisp
@@ -85,7 +85,7 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
   ;; Org-mode issue with src block not expanding
   ;; This is a fix for bug in org-mode where <s TAB does not expand SRC block
   (when (version<= "9.2" (org-version))
-  (require 'org-tempo))
+	(require 'org-tempo))
 
   ;; Coding specific setting
 
@@ -100,7 +100,18 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
 
   ;; Disable default startup buffer
   (setq inhibit-startup-screen t)
+
+  ;; Enable disabled comands
+  (setq disabled-command-function nil)
 #+END_SRC
+
+** Other packages for the config
+
+#+begin_src emacs-lisp
+	(use-package s
+	  :ensure t)
+	(use-package which-linux-distribution)
+#+end_src
 
 * Looks
 ** Theme
@@ -148,13 +159,13 @@ If you press F6 key in your keyboard, it should switch between doom-palenight an
    Key-Chord allows us to bind regular keyboard keys for various commands without having to use prefix keys such as Ctrl, Alt or Super etc.
 
 #+begin_src emacs-lisp
-(use-package use-package-chords
-:ensure t
-:init 
-:config (key-chord-mode 1)
-(setq key-chord-two-keys-delay 0.4)
-(setq key-chord-one-key-delay 0.5) ; default 0.2
-)
+  (use-package use-package-chords
+	:ensure t
+	:init 
+	:config (key-chord-mode 1)
+	(setq key-chord-two-keys-delay 0.4)
+	(setq key-chord-one-key-delay 0.5) ; default 0.2
+	)
 #+end_src
 Here, we changed the delay for the consecutive key to be little higher than default. Adjust this to what you feel comfortable.
 
@@ -287,6 +298,54 @@ A VC plugin that has github integrations
 #+begin_src emacs-lisp
   (use-package vterm :ensure t)
   (use-package eshell-vterm :ensure t)
+#+end_src
+
+** EMMS
+
+#+begin_src emacs-lisp
+  ;; (use-package emms
+  ;;   :config
+  ;;   (require 'emms-player-mpd)
+  ;;   (require 'emms-mpris)
+  ;;   (emms-all)
+  ;;   (setq emms-player-list emms-player-mpd)
+  ;;   (setq emms-info-functions 'emms-info-mpd)
+  ;;   (setq emms-change-volume-function 'emms-volume-mpd-change)
+  ;;   (fset emms-browser-covers 'emms-browser-cache-thumbnail)
+  ;;   (add-to-list 'emms-player-list 'emms-player-mpd))
+
+  (emms-all)
+  (emms-default-players)
+  (emms-mode-line 1)
+
+  (use-package emms-browser
+	:config
+	(setq emms-browser-covers 'emms-browser-cache-thumbnail)
+	(setq emms-browser-covers-for-first-column 'emms-browser-cache-thumbnail))
+
+  (use-package emms-player-mpd
+	:config
+	(setq emms-player-list '(emms-player-mpd))
+	(setq emms-info-functions '(emms-info-mpd))
+	(setq emms-change-volume-function 'emms-volume-mpd-change)
+	(add-to-list 'emms-player-list 'emms-player-mpd))
+
+#+end_src
+
+** Elcord
+
+#+begin_src emacs-lisp
+  (use-package elcord :ensure t)
+  (elcord-mode)
+#+end_src
+
+** Bitlbee
+
+#+begin_src emacs-lisp
+  (when (s-contains? "NixOS" which-linux-distribution) (fset 'bitlbee-command-line
+															 (lambda ()
+															   ((concat bitlbee-executable " " bitlbee-options " -d " bitlbee-user-directory)))))
+  (use-package bitlbee :ensure t)
 #+end_src
 
 * Language Server Protocol (LSP)
@@ -519,18 +578,6 @@ Testing corfu setup
   ;; 			  (corfu-mode))))
 
 
-#+end_src
-
-** EMMS
-
-#+begin_src emacs-lisp
-	(emms-all)
-	(require 'emms-player-mpd)
-	(add-to-list 'emms-player-list 'emms-player-mpd)
-	(setq emms-player-list '(emms-player-mpd)
-		  emms-info-functions '(emms-info-mpd)
-		  emms-change-volume-function '(emms-volume-mpd-change))
-	(require 'emms-mpris)
 #+end_src
 
 

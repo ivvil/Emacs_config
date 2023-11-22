@@ -25,6 +25,7 @@
  '(custom-enabled-themes '(doom-palenight))
  '(custom-safe-themes
    '("b1acc21dcb556407306eccd73f90eb7d69664380483b18496d9c5ccc5968ab43" default))
+ '(emms-browser-covers '(emms-browser-cache-thumbnail))
  '(package-selected-packages
    '(emms sly corfu geiser-guile gdscript-mode lsp-java lsp-intellij helm-lsp lsp-ui dap-mode flycheck yasnippet-snippets company quickrun which-key avy helm-swoop helm-descbinds helm wfnames use-package-chords projectile popup helm-core heaven-and-hell exec-path-from-shell doom-themes)))
 (custom-set-faces
@@ -37,5 +38,10 @@
 (set-face-attribute 'default nil :font "CaskaydiaCove Nerd Font-10")
 (set-frame-font "CaskaydiaCove Nerd Font-10" nil t)
 
-(add-to-list 'load-path "/home/ivvil/.emacs.d/elisp/emacs-gdscript-mode-1.4.0")
+(let ((elisp-directory "/home/ivvil/.emacs.d/elisp/"))
+  (when (file-directory-p elisp-directory)
+    (dolist (entry (directory-files elisp-directory t "^[^.]" 'nosort))
+      (when (file-directory-p entry)
+        (add-to-list 'load-path entry)))))
 (require 'gdscript-mode)
+(require 'which-linux-distribution)
