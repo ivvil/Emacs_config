@@ -77,9 +77,20 @@
 ;; Enable disabled comands
 (setq disabled-command-function nil)
 
+;; Add other elisp files to ~load-path~
+(defun add-subdirectories-to-load-path (directory)
+      "Add subdirectories of DIRECTORY to the `load-path`."
+      (interactive "Directory: ")
+      (let ((default-directory (file-name-as-directory directory)))
+	(dolist (subdir (directory-files directory t "^[^.]" 'nosort))
+	      (when (file-directory-p subdir)
+		(add-to-list 'load-path subdir)))))
+
+(add-subdirectories-to-load-path "~/.emacs.d/elisp")
+
 (use-package s
-  :ensure t)
-(use-package which-linux-distribution)
+      :ensure t)
+(require 'which-linux-distribution)
 
 (use-package doom-themes
 :ensure t 
@@ -224,7 +235,7 @@
 (use-package elcord :ensure t)
 (elcord-mode)
 
-(when (s-contains? "NixOS" which-linux-distribution) (fset 'bitlbee-command-line
+(when (s-contains? "NixOS" (which-linux-distribution)) (fset 'bitlbee-command-line
 														       (lambda ()
 															 ((concat bitlbee-executable " " bitlbee-options " -d " bitlbee-user-directory)))))
 (use-package bitlbee :ensure t)
@@ -326,6 +337,8 @@
 (use-package nix-mode :ensure t)
 
 (use-package rust-mode :ensure t :hook (rust-mode . cargo-minor-mode))
+
+(use-package gdscript-mode :ensure t)
 
 ;;  ;;;; Code Completion
 

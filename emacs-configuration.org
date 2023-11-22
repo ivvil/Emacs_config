@@ -3,7 +3,7 @@
 * Introduction
 This configuration file contains setup of Emacs packages for Language Server Protocol (LSP). I will use ~use-package~ for package management.
 * Setup
-  Since this is an org file, I am using ~org-babel-load-file~ command to load this file from [[init.el]] file. Emacs loads [[init.el]] when it starts. I have setup a variable called ~EMACS_DIR~ to point to *.emacs.d* as the setup directory. Adjust it to match your system. To speed up loading time of emacs, I have used ~gc-cons-threshold~ and ~gc-cons-percentage~ variables, before and after loading this configuration file. I have set ~gc-cons-threshold~ value to 300 mb after startup. Adjust it to comfortable value according to memory in your system. ~lsp-java~ package however has ~1GB~ setup as default.
+p  Since this is an org file, I am using ~org-babel-load-file~ command to load this file from [[init.el]] file. Emacs loads [[init.el]] when it starts. I have setup a variable called ~EMACS_DIR~ to point to *.emacs.d* as the setup directory. Adjust it to match your system. To speed up loading time of emacs, I have used ~gc-cons-threshold~ and ~gc-cons-percentage~ variables, before and after loading this configuration file. I have set ~gc-cons-threshold~ value to 300 mb after startup. Adjust it to comfortable value according to memory in your system. ~lsp-java~ package however has ~1GB~ setup as default.
   
 
 ** Setup repository in org file
@@ -103,14 +103,25 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
 
   ;; Enable disabled comands
   (setq disabled-command-function nil)
+
+  ;; Add other elisp files to ~load-path~
+  (defun add-subdirectories-to-load-path (directory)
+	"Add subdirectories of DIRECTORY to the `load-path`."
+	(interactive "Directory: ")
+	(let ((default-directory (file-name-as-directory directory)))
+	  (dolist (subdir (directory-files directory t "^[^.]" 'nosort))
+		(when (file-directory-p subdir)
+		  (add-to-list 'load-path subdir)))))
+
+  (add-subdirectories-to-load-path "~/.emacs.d/elisp")
 #+END_SRC
 
 ** Other packages for the config
 
 #+begin_src emacs-lisp
-	(use-package s
-	  :ensure t)
-	(use-package which-linux-distribution)
+  (use-package s
+	:ensure t)
+  (require 'which-linux-distribution)
 #+end_src
 
 * Looks
@@ -342,7 +353,7 @@ A VC plugin that has github integrations
 ** Bitlbee
 
 #+begin_src emacs-lisp
-  (when (s-contains? "NixOS" which-linux-distribution) (fset 'bitlbee-command-line
+  (when (s-contains? "NixOS" (which-linux-distribution)) (fset 'bitlbee-command-line
 															 (lambda ()
 															   ((concat bitlbee-executable " " bitlbee-options " -d " bitlbee-user-directory)))))
   (use-package bitlbee :ensure t)
@@ -533,6 +544,12 @@ Pakcages for other languages and hooks
 
 #+begin_src emacs-lisp
   (use-package rust-mode :ensure t :hook (rust-mode . cargo-minor-mode))
+#+end_src
+
+** GDScript
+
+#+begin_src emacs-lisp
+  (use-package gdscript-mode :ensure t)
 #+end_src
 
 * TESTING

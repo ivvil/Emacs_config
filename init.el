@@ -38,10 +38,5 @@
 (set-face-attribute 'default nil :font "CaskaydiaCove Nerd Font-10")
 (set-frame-font "CaskaydiaCove Nerd Font-10" nil t)
 
-(let ((elisp-directory "/home/ivvil/.emacs.d/elisp/"))
-  (when (file-directory-p elisp-directory)
-    (dolist (entry (directory-files elisp-directory t "^[^.]" 'nosort))
-      (when (file-directory-p entry)
-        (add-to-list 'load-path entry)))))
-(require 'gdscript-mode)
-(require 'which-linux-distribution)
+
+
