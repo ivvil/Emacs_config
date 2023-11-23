@@ -325,6 +325,7 @@
        (java-mode . #'lsp-deferred)
        (latex-mode . #'lsp-deferred)
        (gdscript-mode . #'lsp-deferred)
+       (css-mode . #'lsp-deferred)
 )
 :init (setq 
 	lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
