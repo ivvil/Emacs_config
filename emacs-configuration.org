@@ -163,6 +163,37 @@ If you press F6 key in your keyboard, it should switch between doom-palenight an
    (add-hook 'compilation-filter-hook 'my/ansi-colorize-buffer)
    )
    #+end_src
+
+** Code ligatures
+
+#+begin_src emacs-lisp
+  (use-package ligature
+	:ensure t
+	:config
+	;; Enable the "www" ligature in every possible major mode
+	(ligature-set-ligatures 't '("www"))
+	;; Enable traditional ligature support in eww-mode, if the
+	;; `variable-pitch' face supports it
+	(ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+	;; Enable all Cascadia Code ligatures in programming modes
+	(ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+										 ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+										 "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+										 "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+										 "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+										 "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+										 "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+										 "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+										 ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+										 "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+										 "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+										 "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+										 "\\\\" "://"))
+	;; Enables ligature checks globally in all buffers. You can also do it
+	;; per mode with `ligature-mode'.
+	(global-ligature-mode t))
+#+end_src
+
 * Custom Packages
   In this section we will install some of the packages that we will use for various project and file management.
 
@@ -464,6 +495,7 @@ Let's install the main package for lsp. Here we will integrate lsp with which-ke
 	 (lsp-mode . lsp-enable-which-key-integration)
 	 (java-mode . #'lsp-deferred)
 	 (latex-mode . #'lsp-deferred)
+	 (gdscript-mode . #'lsp-deferred)
   )
   :init (setq 
 	  lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
