@@ -266,6 +266,8 @@
 															 ((concat bitlbee-executable " " bitlbee-options " -d " bitlbee-user-directory)))))
 (use-package bitlbee :ensure t)
 
+(use-package undo-tree :ensure t :init (global-undo-tree-mode))
+
 (use-package company :ensure t :init (global-company-mode))
 
 (use-package yasnippet :config (yas-global-mode))
