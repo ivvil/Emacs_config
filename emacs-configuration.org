@@ -545,6 +545,12 @@ Pakcages for other languages and hooks
   (add-hook 'js-mode-hook 'lsp)
 #+end_src
 
+Adding better ~JSON~ mode
+
+#+begin_src emacs-lisp
+  (use-package json-mode :ensure t)
+#+end_src
+
 ** Lisp
 
 *** Common Lisp

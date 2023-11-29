@@ -352,6 +352,8 @@
 
 (add-hook 'js-mode-hook 'lsp)
 
+(use-package json-mode :ensure t)
+
 (use-package sly :ensure t)
 (setq inferior-lisp-program "sbcl")
 (add-hook 'common-lisp-hook 'company-mode)
