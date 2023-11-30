@@ -396,6 +396,20 @@ A VC plugin that has github integrations
   (use-package undo-tree :ensure t :init (global-undo-tree-mode))
 #+end_src
 
+** Skewer
+
+Add skewer mode for a live server
+
+#+begin_src emacs-lisp
+  (use-package skewer-mode :ensure t)
+#+end_src
+
+** Smart compile
+
+#+begin_src emacs-lisp
+  (use-package smart-compile :ensure t)
+#+end_src
+
 * Language Server Protocol (LSP)
   With above setup done, below we will setup several packages closely related to LSP.
 
