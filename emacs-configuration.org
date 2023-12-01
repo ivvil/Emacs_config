@@ -116,6 +116,12 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
   (add-subdirectories-to-load-path "~/.emacs.d/elisp")
 #+END_SRC
 
+*** Safe directory variables
+
+#+begin_src emacs-lisp
+  (add-to-list 'safe-local-variable-values '(skewer-reload-css-compile-command . "scss style.scss styles.css"))
+#+end_src
+
 ** Other packages for the config
 
 #+begin_src emacs-lisp
@@ -402,6 +408,7 @@ Add skewer mode for a live server
 
 #+begin_src emacs-lisp
   (use-package skewer-mode :ensure t)
+  (use-package skewer-reload-stylesheets :ensure t)
 #+end_src
 
 ** Smart compile
@@ -563,6 +570,13 @@ Adding better ~JSON~ mode
 
 #+begin_src emacs-lisp
   (use-package json-mode :ensure t)
+#+end_src
+
+** CSS
+
+#+begin_src emacs-lisp
+  (add-hook 'scss-mode-hook
+			(lambda () ((skewer-reload-stylesheets-reload-on-save)(skewer-reload-stylesheets-start-editing))))
 #+end_src
 
 ** Lisp

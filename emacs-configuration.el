@@ -88,6 +88,8 @@
 
 (add-subdirectories-to-load-path "~/.emacs.d/elisp")
 
+(add-to-list 'safe-local-variable-values '(skewer-reload-css-compile-command . "scss style.scss styles.css"))
+
 (use-package s
       :ensure t)
 (require 'which-linux-distribution)
@@ -269,6 +271,7 @@
 (use-package undo-tree :ensure t :init (global-undo-tree-mode))
 
 (use-package skewer-mode :ensure t)
+(use-package skewer-reload-stylesheets :ensure t)
 
 (use-package smart-compile :ensure t)
 
@@ -357,6 +360,9 @@
 (add-hook 'js-mode-hook 'lsp)
 
 (use-package json-mode :ensure t)
+
+(add-hook 'scss-mode-hook
+		      (lambda () ((skewer-reload-stylesheets-reload-on-save)(skewer-reload-stylesheets-start-editing))))
 
 (use-package sly :ensure t)
 (setq inferior-lisp-program "sbcl")
