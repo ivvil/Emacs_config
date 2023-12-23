@@ -3,9 +3,8 @@
 * Introduction
 This configuration file contains setup of Emacs packages for Language Server Protocol (LSP). I will use ~use-package~ for package management.
 * Setup
-p  Since this is an org file, I am using ~org-babel-load-file~ command to load this file from [[init.el]] file. Emacs loads [[init.el]] when it starts. I have setup a variable called ~EMACS_DIR~ to point to *.emacs.d* as the setup directory. Adjust it to match your system. To speed up loading time of emacs, I have used ~gc-cons-threshold~ and ~gc-cons-percentage~ variables, before and after loading this configuration file. I have set ~gc-cons-threshold~ value to 300 mb after startup. Adjust it to comfortable value according to memory in your system. ~lsp-java~ package however has ~1GB~ setup as default.
+Since this is an org file, I am using ~org-babel-load-file~ command to load this file from [[init.el]] file. Emacs loads [[init.el]] when it starts. I have setup a variable called ~EMACS_DIR~ to point to *.emacs.d* as the setup directory. Adjust it to match your system. To speed up loading time of emacs, I have used ~gc-cons-threshold~ and ~gc-cons-percentage~ variables, before and after loading this configuration file. I have set ~gc-cons-threshold~ value to 300 mb after startup. Adjust it to comfortable value according to memory in your system. ~lsp-java~ package however has ~1GB~ setup as default.
   
-
 ** Setup repository in org file
 In the following code block, we will initialize package repositories and after that install ~use-package~. This package is used to install other packages.
 
@@ -30,6 +29,7 @@ In the following code block, we will initialize package repositories and after t
 
 ** Environment Setup
 In some operating systems Emacs does not load environment variables properly. Therefore, below we install a package called ~exec-path-from-shell~ and initialize it.
+
  #+begin_src emacs-lisp
  (use-package exec-path-from-shell :ensure t)
  (exec-path-from-shell-initialize)
@@ -48,6 +48,7 @@ In some operating systems Emacs does not load environment variables properly. Th
  #+END_SRC
 
 ** Basic setup
+
 Here, I add some basic emacs setup like loading the language, disabling the toolbar, setting up backup directory etc. I have added comments to each setting.
 
 #+BEGIN_SRC emacs-lisp
@@ -116,10 +117,62 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
   (add-subdirectories-to-load-path "~/.emacs.d/elisp")
 #+END_SRC
 
-*** Safe directory variables
+** Emacs dashboard
 
 #+begin_src emacs-lisp
-  (add-to-list 'safe-local-variable-values '(skewer-reload-css-compile-command . "scss style.scss styles.css"))
+  ;; use-package with package.el:
+  (use-package dashboard
+	:ensure t
+	:config
+	(dashboard-setup-startup-hook))
+  (setq dashboard-display-icons-p t) ;; display icons on both GUI and terminal
+  ;; (setq dashboard-icon-type 'nerd-icons) ;; use `nerd-icons' package
+  (setq dashboard-icon-type 'all-the-icons) ;; use `all-the-icons' package
+  ;; (setq dashboard-set-heading-icons t)
+  ;; (setq dashboard-set-file-icons t)
+
+  (setq dashboard-startup-banner 'logo)
+  ;; Value can be
+  ;; - nil to display no banner
+  ;; - 'official which displays the official emacs logo
+  ;; - 'logo which displays an alternative emacs logo
+  ;; - 1, 2 or 3 which displays one of the text banners
+  ;; - "path/to/your/image.gif", "path/to/your/image.png", "path/to/your/text.txt" or "path/to/your/image.xbm" which displays whatever gif/image/text/xbm you would prefer
+  ;; - a cons of '("path/to/your/image.png" . "path/to/your/text.txt")
+
+  (setq dashboard-items '((recents  . 5)
+						  (bookmarks . 5)
+						  (projects . 5)
+						  (agenda . 5)
+						  (registers . 5)))
+#+end_src
+
+*** Page break lines
+
+#+begin_src emacs-lisp
+  (use-package page-break-lines :ensure t)
+#+end_src
+
+*** All the icons
+
+#+begin_src emacs-lisp
+  (use-package all-the-icons
+	:if (display-graphic-p) :ensure t)
+  (use-package all-the-icons-dired :ensure t)
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+#+end_src
+
+*** Nerd icons
+
+#+begin_src emacs-lisp
+  ;; (use-package nerd-icons
+  ;;   ;; :custom
+  ;;   ;; The Nerd Font you want to use in GUI
+  ;;   ;; "Symbols Nerd Font Mono" is the default and is recommended
+  ;;   ;; but you can use any other Nerd Font if you want
+  ;;   ;; (nerd-icons-font-family "Symbols Nerd Font Mono")
+  ;;   :ensure t
+  ;;   )
 #+end_src
 
 ** Other packages for the config
@@ -391,8 +444,8 @@ A VC plugin that has github integrations
 
 #+begin_src emacs-lisp
   (when (s-contains? "NixOS" (which-linux-distribution)) (fset 'bitlbee-command-line
-															 (lambda ()
-															   ((concat bitlbee-executable " " bitlbee-options " -d " bitlbee-user-directory)))))
+							       (lambda ()
+								 ((concat bitlbee-executable " " bitlbee-options " -d " bitlbee-user-directory)))))
   (use-package bitlbee :ensure t)
 #+end_src
 
@@ -415,6 +468,55 @@ Add skewer mode for a live server
 
 #+begin_src emacs-lisp
   (use-package smart-compile :ensure t)
+#+end_src
+
+** Prettier
+
+#+begin_src emacs-lisp
+  (use-package prettier :ensure t)
+#+end_src
+
+** Tree sitter
+
+#+begin_src emacs-lisp
+  ;; (use-package tree-sitter :ensure t)
+  ;; (use-package tree-sitter-langs
+  ;;   :ensure t
+  ;;   :after tree-sitter)
+
+  ;; (setq treesit-language-source-alist
+  ;; 	  '((astro "https://github.com/virchau13/tree-sitter-astro")
+  ;; 		(css "https://github.com/tree-sitter/tree-sitter-css")
+  ;; 		(tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")))
+
+  ;; (use-package treesit-auto
+  ;;   :ensure t
+  ;;   :config
+  ;;   (global-treesit-auto-mode))
+
+  ;; ;; (let ((astro-recipe (make-treesit-auto-recipe
+  ;; ;; 					 :lang 'astro
+  ;; ;; 					 :ts-mode 'astro-ts-mode
+  ;; ;; 					 :url "https://github.com/virchau13/tree-sitter-astro"
+  ;; ;; 					 :revision "master"
+  ;; ;; 					 :source-dir "src")))
+  ;; ;;   (add-to-list 'treesit-auto-recipe-list astro-recipe))
+#+end_src
+
+** Doom mode line
+
+#+begin_src emacs-lisp
+  ;; (use-package doom-modeline
+  ;;       :ensure t
+  ;;       :init (doom-modeline-mode 1))
+#+end_src
+
+** Minion
+
+#+begin_src emacs-lisp :tangle yes
+  ;; (use-package minions
+  ;; :ensure t
+  ;; :init (minions-mode))
 #+end_src
 
 * Language Server Protocol (LSP)
@@ -560,6 +662,20 @@ Pakcages for other languages and hooks
   (add-hook 'html-mode-hook 'lsp)
 #+end_src
 
+*** Frameworks
+
+**** SvelteKit
+
+#+begin_src emacs-lisp 
+  (use-package svelte-mode :ensure t)
+#+end_src
+
+**** Astro
+
+#+begin_src emacs-lisp
+  (use-package astro-ts-mode :ensure t)
+#+end_src
+
 ** JavaScript
 
 #+begin_src emacs-lisp
@@ -625,6 +741,8 @@ Adding better ~JSON~ mode
   (use-package gdscript-mode :ensure t)
 #+end_src
 
+* EXWM
+
 * TESTING
 
 ** Corfu
@@ -668,6 +786,52 @@ Testing corfu setup
   ;; 			  (corfu-mode))))
 
 
+#+end_src
+
+** EAF
+
+#+begin_src emacs-lisp
+  ;; (use-package eaf
+  ;;   :load-path "~/.emacs.d/site-lisp/emacs-application-framework"
+  ;;   :custom
+  ;; 										; See https://github.com/emacs-eaf/emacs-application-framework/wiki/Customization
+  ;;   (eaf-browser-continue-where-left-off t)
+  ;;   (eaf-browser-enable-adblocker t)
+  ;;   (browse-url-browser-function 'eaf-open-browser)
+  ;;   :config
+  ;;   (defalias 'browse-web #'eaf-open-browser)
+  ;;   (eaf-bind-key scroll_up "C-n" eaf-pdf-viewer-keybinding)
+  ;;   (eaf-bind-key scroll_down "C-p" eaf-pdf-viewer-keybinding)
+  ;;   (eaf-bind-key take_photo "p" eaf-camera-keybinding)
+  ;;   (eaf-bind-key nil "M-q" eaf-browser-keybinding)) ;; unbind, see more in the Wiki
+
+  ;; (require 'eaf-browser)
+  ;; (require 'eaf-pdf-viewer)
+  ;; (require 'eaf-music-player)
+  ;; (require 'eaf-video-player)
+  ;; (require 'eaf-js-video-player)
+  ;; (require 'eaf-image-viewer)
+  ;; (require 'eaf-rss-reader)
+  ;; (require 'eaf-terminal)
+  ;; (require 'eaf-markdown-previewer)
+  ;; (require 'eaf-org-previewer)
+  ;; (require 'eaf-camera)
+  ;; (require 'eaf-git)
+  ;; (require 'eaf-file-manager)
+  ;; (require 'eaf-mindmap)
+  ;; (require 'eaf-netease-cloud-music)
+  ;; (require 'eaf-system-monitor)
+  ;; (require 'eaf-file-browser)
+  ;; (require 'eaf-file-sender)
+  ;; (require 'eaf-airshare)
+  ;; (require 'eaf-jupyter)
+  ;; (require 'eaf-2048)
+  ;; (require 'eaf-markmap)
+  ;; (require 'eaf-map)
+  ;; (require 'eaf-demo)
+  ;; (require 'eaf-vue-demo)
+  ;; (require 'eaf-vue-tailwindcss)
+  ;; (require 'eaf-pyqterminal)
 #+end_src
 
 

@@ -68,6 +68,12 @@ recentf
 tramp
 transient/history.el
 %backup%~
+*.*~undo-tree~
+
+# Emacs fnnniles
 .dap-breakpoints
 eshell/
 emms/
+projects
+ac-comphist.dat
+bookmarks
