@@ -1,0 +1,28 @@
+;; Emacs-W3 HTTP cookies file
+;; Automatically generated file!!! DO NOT EDIT!!!
+
+(setq url-cookie-storage
+ 'nil)
+(setq url-cookie-secure-storage
+ '((".google.com"
+  [url-cookie "AEC" "Ae3NU9Op1zPVtjFuqFoHH4rnFGab647r5i6F72YMxaY76pukqlnUTdlYqQ" "Mon, 15-Jul-2024 12:51:59 GMT" "/" ".google.com" t])
+ (".youtube.com"
+  [url-cookie "CONSENT" "PENDING+836" "Fri, 16-Jan-2026 12:52:30 GMT" "/" ".youtube.com" t]
+  [url-cookie "VISITOR_PRIVACY_METADATA" "CgJFUxIIEgQSAgsMIA8%3D" "Sat, 15-Feb-2025 12:52:30 GMT" "/" ".youtube.com" t]
+  [url-cookie "__Secure-YEC" "CgtwM3hvZ0Y2SmU0cyiOm5-tBjIOCgJFUxIIEgQSAgsMIA8%3D" "Sat, 15-Feb-2025 12:52:29 GMT" "/" ".youtube.com" t])
+ ("es.pornhub.com"
+  [url-cookie "__l" "65A7CD73-42FE722901BB30F226-CDF265" "jue ene 16 18:40:49 2025 GMT" "/" "es.pornhub.com" t])
+ ("github.com"
+  [url-cookie "_octo" "GH1.1.1039161153.1708951666" "Wed, 26 Feb 2025 12:47:46 GMT" "/" "github.com" t]
+  [url-cookie "logged_in" "no" "Wed, 26 Feb 2025 12:47:46 GMT" "/" "github.com" t])
+ ("pornhub.com"
+  [url-cookie "ss" "100633816091445382" "jue ene 16 12:52:03 2025 GMT" "/" "pornhub.com" t]))
+)
+
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; coding: utf-8-emacs-unix
+;; End:
+
+;;; cookies ends here
