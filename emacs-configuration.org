@@ -179,9 +179,9 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
 ** Other packages for the config
 
 #+begin_src emacs-lisp
-  (use-package s
-	:ensure t)
-  (require 'which-linux-distribution)
+  ;; (use-package s
+  ;;   :ensure t)
+  ;; (require 'which-linux-distribution)
 #+end_src
 
 * Looks
@@ -252,6 +252,14 @@ If you press F6 key in your keyboard, it should switch between doom-palenight an
 	;; Enables ligature checks globally in all buffers. You can also do it
 	;; per mode with `ligature-mode'.
 	(global-ligature-mode t))
+#+end_src
+
+** Doom modeline
+
+#+begin_src emacs-lisp 
+  (use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
 #+end_src
 
 * Custom Packages
@@ -444,10 +452,10 @@ A VC plugin that has github integrations
 ** Bitlbee
 
 #+begin_src emacs-lisp
-  (when (s-contains? "NixOS" (which-linux-distribution)) (fset 'bitlbee-command-line
-							       (lambda ()
-								 ((concat bitlbee-executable " " bitlbee-options " -d " bitlbee-user-directory)))))
-  (use-package bitlbee :ensure t)
+  ;; (when (s-contains? "NixOS" (which-linux-distribution)) (fset 'bitlbee-command-line
+  ;; 							     (lambda ()
+  ;; 							   ((concat bitlbee-executable " " bitlbee-options " -d " bitlbee-user-directory)))))
+  ;; (use-package bitlbee :ensure t)
 #+end_src
 
 ** Undo history

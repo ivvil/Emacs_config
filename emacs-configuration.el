@@ -131,9 +131,9 @@
 ;;   :ensure t
 ;;   )
 
-(use-package s
-  :ensure t)
-(require 'which-linux-distribution)
+;; (use-package s
+;;   :ensure t)
+;; (require 'which-linux-distribution)
 
 (use-package doom-themes
 :ensure t 
@@ -304,10 +304,10 @@
 (use-package elcord :ensure t)
 (elcord-mode)
 
-(when (s-contains? "NixOS" (which-linux-distribution)) (fset 'bitlbee-command-line
-							     (lambda ()
-							   ((concat bitlbee-executable " " bitlbee-options " -d " bitlbee-user-directory)))))
-(use-package bitlbee :ensure t)
+;; (when (s-contains? "NixOS" (which-linux-distribution)) (fset 'bitlbee-command-line
+;; 							     (lambda ()
+;; 							   ((concat bitlbee-executable " " bitlbee-options " -d " bitlbee-user-directory)))))
+;; (use-package bitlbee :ensure t)
 
 (use-package undo-tree :ensure t :init (global-undo-tree-mode))
 
