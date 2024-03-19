@@ -13,7 +13,7 @@
 										; Install use-package
 (setq package-list '(use-package))
 (dolist (package package-list)
-  (unless (package-installed-p package) (package-install package)))
+      (unless (package-installed-p package) (package-install package)))
 
 (use-package exec-path-from-shell :ensure t)
 (exec-path-from-shell-initialize)
@@ -52,14 +52,14 @@
 
 (setq user-cache-directory (concat EMACS_DIR "cache"))
 (setq backup-directory-alist `(("." . ,(expand-file-name "backups" user-cache-directory)))
-	  url-history-file (expand-file-name "url/history" user-cache-directory)
-	  auto-save-list-file-prefix (expand-file-name "auto-save-list/.saves-" user-cache-directory)
-	  projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" user-cache-directory))
+	      url-history-file (expand-file-name "url/history" user-cache-directory)
+	      auto-save-list-file-prefix (expand-file-name "auto-save-list/.saves-" user-cache-directory)
+	      projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" user-cache-directory))
 
 ;; Org-mode issue with src block not expanding
 ;; This is a fix for bug in org-mode where <s TAB does not expand SRC block
 (when (version<= "9.2" (org-version))
-  (require 'org-tempo))
+      (require 'org-tempo))
 
 ;; Coding specific setting
 
@@ -80,20 +80,20 @@
 
 ;; Add other elisp files to ~load-path~
 (defun add-subdirectories-to-load-path (directory)
-  "Add subdirectories of DIRECTORY to the `load-path`."
-  (interactive "Directory: ")
-  (let ((default-directory (file-name-as-directory directory)))
+      "Add subdirectories of DIRECTORY to the `load-path`."
+      (interactive "Directory: ")
+      (let ((default-directory (file-name-as-directory directory)))
 	(dolist (subdir (directory-files directory t "^[^.]" 'nosort))
-	  (when (file-directory-p subdir)
+	      (when (file-directory-p subdir)
 		(add-to-list 'load-path subdir)))))
 
 (add-subdirectories-to-load-path "~/.emacs.d/elisp")
 
 ;; use-package with package.el:
 (use-package dashboard
-  :ensure t
-  :config
-  (dashboard-setup-startup-hook))
+      :ensure t
+      :config
+      (dashboard-setup-startup-hook))
 (setq dashboard-display-icons-p t) ;; display icons on both GUI and terminal
 ;; (setq dashboard-icon-type 'nerd-icons) ;; use `nerd-icons' package
 (setq dashboard-icon-type 'all-the-icons) ;; use `all-the-icons' package
@@ -118,7 +118,7 @@
 (use-package page-break-lines :ensure t)
 
 (use-package all-the-icons
-  :if (display-graphic-p) :ensure t)
+      :if (display-graphic-p) :ensure t)
 (use-package all-the-icons-dired :ensure t)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
@@ -162,38 +162,42 @@
 )
 
 (use-package ligature
-  :ensure t
-  :config
-  ;; Enable the "www" ligature in every possible major mode
-  (ligature-set-ligatures 't '("www"))
-  ;; Enable traditional ligature support in eww-mode, if the
-  ;; `variable-pitch' face supports it
-  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
-  ;; Enable all Cascadia Code ligatures in programming modes
-  (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
-									   ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
-									   "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
-									   "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
-									   "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
-									   "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
-									   "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
-									   "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
-									   ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
-									   "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
-									   "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
-									   "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
-									   "\\\\" "://"))
-  ;; Enables ligature checks globally in all buffers. You can also do it
-  ;; per mode with `ligature-mode'.
-  (global-ligature-mode t))
+      :ensure t
+      :config
+      ;; Enable the "www" ligature in every possible major mode
+      (ligature-set-ligatures 't '("www"))
+      ;; Enable traditional ligature support in eww-mode, if the
+      ;; `variable-pitch' face supports it
+      (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+      ;; Enable all Cascadia Code ligatures in programming modes
+      (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+									       ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+									       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+									       "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+									       "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+									       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+									       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+									       "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+									       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+									       "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+									       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+									       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+									       "\\\\" "://"))
+      ;; Enables ligature checks globally in all buffers. You can also do it
+      ;; per mode with `ligature-mode'.
+      (global-ligature-mode t))
+
+(use-package doom-modeline
+:ensure t
+:init (doom-modeline-mode))
 
 (use-package use-package-chords
-  :ensure t
-  :init 
-  :config (key-chord-mode 1)
-  (setq key-chord-two-keys-delay 0.4)
-  (setq key-chord-one-key-delay 0.5) ; default 0.2
-  )
+      :ensure t
+      :init 
+      :config (key-chord-mode 1)
+      (setq key-chord-two-keys-delay 0.4)
+      (setq key-chord-one-key-delay 0.5) ; default 0.2
+      )
 
 (use-package projectile 
 :ensure t
@@ -290,16 +294,16 @@
 (emms-mode-line 1)
 
 (use-package emms-browser
-  :config
-  (setq emms-browser-covers 'emms-browser-cache-thumbnail)
-  (setq emms-browser-covers-for-first-column 'emms-browser-cache-thumbnail))
+      :config
+      (setq emms-browser-covers 'emms-browser-cache-thumbnail)
+      (setq emms-browser-covers-for-first-column 'emms-browser-cache-thumbnail))
 
 (use-package emms-player-mpd
-  :config
-  (setq emms-player-list '(emms-player-mpd))
-  (setq emms-info-functions '(emms-info-mpd))
-  (setq emms-change-volume-function 'emms-volume-mpd-change)
-  (add-to-list 'emms-player-list 'emms-player-mpd))
+      :config
+      (setq emms-player-list '(emms-player-mpd))
+      (setq emms-info-functions '(emms-info-mpd))
+      (setq emms-change-volume-function 'emms-volume-mpd-change)
+      (add-to-list 'emms-player-list 'emms-player-mpd))
 
 (use-package elcord :ensure t)
 (elcord-mode)
@@ -350,8 +354,8 @@
 ;; :init (minions-mode))
 
 (use-package org-modern
-  :ensure t
-  :init (global-org-modern-mode))
+      :ensure t
+      :init (global-org-modern-mode))
 
 (use-package cdlatex
   :ensure t
@@ -361,8 +365,8 @@
 (setq sqlplus-connect-string "sys/test@//localhost:1521/xe as sysdba")
 
 (use-package multiple-cursors
-  :ensure t
-  :bind (("C-S-c C-S-c" . mc/edit-lines)
+      :ensure t
+      :bind (("C-S-c C-S-c" . mc/edit-lines)
 		 ("C->" . mc/mark-next-like-this)
 		 ("C-<" . mc/mark-previous-like-this)
 		 ("C-c C-<" . mc/mark-all-like-this)))
@@ -376,15 +380,15 @@
 (setq ispell-default-dicctionary "es")
 
 (use-package dap-mode
-  :ensure t
-  :after (lsp-mode)
-  :functions dap-hydra/nil
-  :config
-  (require 'dap-java)
-  :bind (:map lsp-mode-map
+      :ensure t
+      :after (lsp-mode)
+      :functions dap-hydra/nil
+      :config
+      (require 'dap-java)
+      :bind (:map lsp-mode-map
 		 ("<f5>" . dap-debug)
 		 ("M-<f5>" . dap-hydra))
-  :hook ((dap-mode . dap-ui-mode)
+      :hook ((dap-mode . dap-ui-mode)
 	(dap-session-created . (lambda (&_rest) (dap-hydra)))
 	(dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))
 
@@ -422,11 +426,11 @@
 (use-package lsp-mode
 :ensure t
 :hook (
-   (lsp-mode . lsp-enable-which-key-integration)
-   (java-mode . #'lsp-deferred)
-   (latex-mode . #'lsp-deferred)
-   (gdscript-mode . #'lsp-deferred)
-   (css-mode . #'lsp-deferred)
+       (lsp-mode . lsp-enable-which-key-integration)
+       (java-mode . #'lsp-deferred)
+       (latex-mode . #'lsp-deferred)
+       (gdscript-mode . #'lsp-deferred)
+       (css-mode . #'lsp-deferred)
 )
 :init (setq 
 	lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
@@ -461,7 +465,7 @@
 (use-package json-mode :ensure t)
 
 (add-hook 'scss-mode-hook
-		  (lambda () ((skewer-reload-stylesheets-reload-on-save)(skewer-reload-stylesheets-start-editing))))
+		      (lambda () ((skewer-reload-stylesheets-reload-on-save)(skewer-reload-stylesheets-start-editing))))
 
 (use-package sly :ensure t)
 (setq inferior-lisp-program "sbcl")

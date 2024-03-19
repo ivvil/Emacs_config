@@ -259,7 +259,7 @@ If you press F6 key in your keyboard, it should switch between doom-palenight an
 #+begin_src emacs-lisp 
   (use-package doom-modeline
   :ensure t
-  :init (doom-modeline-mode 1))
+  :init (doom-modeline-mode))
 #+end_src
 
 * Custom Packages
