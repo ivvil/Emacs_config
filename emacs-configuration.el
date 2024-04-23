@@ -324,9 +324,14 @@
 :bind ("C-c r" . quickrun))
 
 (use-package magit :ensure t)
+(use-package magit-todos
+      :ensure t
+      :after magit
+      :config (magit-todos-mode 1))
 (setenv "TERM" "dumb")
 
-(use-package envrc :ensure t)
+(use-package envrc :ensure t
+      :init (envrc-mode))
 
 (use-package vterm :ensure t)
 (use-package eshell-vterm :ensure t)
@@ -342,21 +347,21 @@
 ;;   (fset emms-browser-covers 'emms-browser-cache-thumbnail)
 ;;   (add-to-list 'emms-player-list 'emms-player-mpd))
 
-(emms-all)
-(emms-default-players)
-(emms-mode-line 1)
+;; (emms-all)
+;; (emms-default-players)
+;; (emms-mode-line 1)
 
-(use-package emms-browser
-      :config
-      (setq emms-browser-covers 'emms-browser-cache-thumbnail)
-      (setq emms-browser-covers-for-first-column 'emms-browser-cache-thumbnail))
+;; (use-package emms-browser
+;;   :config
+;;   (setq emms-browser-covers 'emms-browser-cache-thumbnail)
+;;   (setq emms-browser-covers-for-first-column 'emms-browser-cache-thumbnail))
 
-(use-package emms-player-mpd
-      :config
-      (setq emms-player-list '(emms-player-mpd))
-      (setq emms-info-functions '(emms-info-mpd))
-      (setq emms-change-volume-function 'emms-volume-mpd-change)
-      (add-to-list 'emms-player-list 'emms-player-mpd))
+;; (use-package emms-player-mpd
+;;   :config
+;;   (setq emms-player-list '(emms-player-mpd))
+;;   (setq emms-info-functions '(emms-info-mpd))
+;;   (setq emms-change-volume-function 'emms-volume-mpd-change)
+;;   (add-to-list 'emms-player-list 'emms-player-mpd))
 
 (use-package elcord :ensure t)
 (elcord-mode)
@@ -542,6 +547,9 @@
 (use-package auto-complete-auctex :ensure t)
 (setq-default TeX-engine 'XeTeX)
 
+(use-package markless
+      :ensure t)
+
 (use-package nix-mode :ensure t)
 
 (use-package rust-mode :ensure t :hook (rust-mode . cargo-minor-mode))
@@ -552,7 +560,8 @@
 
 (use-package gdscript-mode :ensure t)
 
-(require 'ccls)
+(use-package ccls
+      :ensure t)
 (setq ccls-executable "/run/current-system/sw/bin/ccls")
 
 (require 'dap-lldb)

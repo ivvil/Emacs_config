@@ -116,7 +116,13 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
 		  (add-to-list 'load-path subdir)))))
 
   (add-subdirectories-to-load-path "~/.emacs.d/elisp")
+
+  ;; Highlight todos
+  (global-hl-todo-mode 1)
 #+END_SRC
+
+#+RESULTS:
+: t
 
 ** Emacs dashboard
 
@@ -175,6 +181,8 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
   ;;   :ensure t
   ;;   )
 #+end_src
+
+
 
 ** Other packages for the config
 
@@ -451,13 +459,18 @@ We can use quickrun package to execute code (if it has main). E.g. If you have a
 A VC plugin that has github integrations
 #+begin_src emacs-lisp
   (use-package magit :ensure t)
+  (use-package magit-todos
+	:ensure t
+	:after magit
+	:config (magit-todos-mode 1))
   (setenv "TERM" "dumb")
 #+end_src
 
 ** Envrc
 
 #+begin_src emacs-lisp
-  (use-package envrc :ensure t)
+  (use-package envrc :ensure t
+	:init (envrc-mode))
 #+end_src
 
 ** vterm
@@ -481,21 +494,21 @@ A VC plugin that has github integrations
   ;;   (fset emms-browser-covers 'emms-browser-cache-thumbnail)
   ;;   (add-to-list 'emms-player-list 'emms-player-mpd))
 
-  (emms-all)
-  (emms-default-players)
-  (emms-mode-line 1)
+  ;; (emms-all)
+  ;; (emms-default-players)
+  ;; (emms-mode-line 1)
 
-  (use-package emms-browser
-	:config
-	(setq emms-browser-covers 'emms-browser-cache-thumbnail)
-	(setq emms-browser-covers-for-first-column 'emms-browser-cache-thumbnail))
+  ;; (use-package emms-browser
+  ;;   :config
+  ;;   (setq emms-browser-covers 'emms-browser-cache-thumbnail)
+  ;;   (setq emms-browser-covers-for-first-column 'emms-browser-cache-thumbnail))
 
-  (use-package emms-player-mpd
-	:config
-	(setq emms-player-list '(emms-player-mpd))
-	(setq emms-info-functions '(emms-info-mpd))
-	(setq emms-change-volume-function 'emms-volume-mpd-change)
-	(add-to-list 'emms-player-list 'emms-player-mpd))
+  ;; (use-package emms-player-mpd
+  ;;   :config
+  ;;   (setq emms-player-list '(emms-player-mpd))
+  ;;   (setq emms-info-functions '(emms-info-mpd))
+  ;;   (setq emms-change-volume-function 'emms-volume-mpd-change)
+  ;;   (add-to-list 'emms-player-list 'emms-player-mpd))
 
 #+end_src
 
@@ -845,6 +858,13 @@ Adding better ~JSON~ mode
   (setq-default TeX-engine 'XeTeX)
 #+end_src
 
+** Marklses
+
+#+begin_src emacs-lisp
+  (use-package markless
+	:ensure t)
+#+end_src
+
 ** Nix
 
 #+begin_src emacs-lisp
@@ -870,7 +890,8 @@ Adding better ~JSON~ mode
 ** C++
 
 #+begin_src emacs-lisp
-  (require 'ccls)
+  (use-package ccls
+	:ensure t)
   (setq ccls-executable "/run/current-system/sw/bin/ccls")
 
   (require 'dap-lldb)
