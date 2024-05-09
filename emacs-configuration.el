@@ -15,8 +15,8 @@
 (dolist (package package-list)
       (unless (package-installed-p package) (package-install package)))
 
-(use-package exec-path-from-shell :ensure t)
-(exec-path-from-shell-initialize)
+;; (use-package exec-path-from-shell :ensure t)
+;; (exec-path-from-shell-initialize)
 
 ;; Load platform specific variables using specific files. E.g. linux.el. 
 ;; Make necessary changes as needed
@@ -88,6 +88,11 @@
 		(add-to-list 'load-path subdir)))))
 
 (add-subdirectories-to-load-path "~/.emacs.d/elisp")
+
+;; Highlight todos
+(use-package hl-todo
+      :ensure t
+      :init (global-hl-todo-mode))
 
 ;; use-package with package.el:
 (use-package dashboard
@@ -239,7 +244,7 @@
 :ensure t
 :init (doom-modeline-mode))
 
-(use-package rainbow-mode
+(use-package rainbow-delimiters
       :ensure t
       :hook (prog-mode . rainbow-delimiters-mode))
 
@@ -545,7 +550,7 @@
 (use-package auctex :ensure t :hook (latex-mode . acutex-mode))
 (use-package company-auctex :ensure t)
 (use-package auto-complete-auctex :ensure t)
-(setq-default TeX-engine 'XeTeX)
+(setq-default TeX-engine 'xetex)
 
 (use-package markless
       :ensure t)

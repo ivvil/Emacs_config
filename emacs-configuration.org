@@ -32,8 +32,8 @@ In the following code block, we will initialize package repositories and after t
 In some operating systems Emacs does not load environment variables properly. Therefore, below we install a package called ~exec-path-from-shell~ and initialize it.
 
  #+begin_src emacs-lisp
- (use-package exec-path-from-shell :ensure t)
- (exec-path-from-shell-initialize)
+   ;; (use-package exec-path-from-shell :ensure t)
+   ;; (exec-path-from-shell-initialize)
  #+end_src
 
 ** Operating System specific variable setup
@@ -118,11 +118,10 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
   (add-subdirectories-to-load-path "~/.emacs.d/elisp")
 
   ;; Highlight todos
-  (global-hl-todo-mode 1)
+  (use-package hl-todo
+	:ensure t
+	:init (global-hl-todo-mode))
 #+END_SRC
-
-#+RESULTS:
-: t
 
 ** Emacs dashboard
 
@@ -321,7 +320,7 @@ If you press F6 key in your keyboard, it should switch between doom-palenight an
 ** Rainbow delimiters
 
 #+begin_src emacs-lisp
-  (use-package rainbow-mode
+  (use-package rainbow-delimiters
 	:ensure t
 	:hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
@@ -855,7 +854,7 @@ Adding better ~JSON~ mode
   (use-package auctex :ensure t :hook (latex-mode . acutex-mode))
   (use-package company-auctex :ensure t)
   (use-package auto-complete-auctex :ensure t)
-  (setq-default TeX-engine 'XeTeX)
+  (setq-default TeX-engine 'xetex)
 #+end_src
 
 ** Marklses
