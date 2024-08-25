@@ -153,8 +153,8 @@
       :init
       (setq heaven-and-hell-theme-type 'dark)
       (setq heaven-and-hell-themes
-		'((light . solo-jazz)
-		      (dark . doom-palenight)))
+		'((light . doom-solarized-light)
+		      (dark . doom-solarized-dark-high-contrast)))
       :hook (after-init . heaven-and-hell-init-hook)
       :bind (("C-c <f6>" . heaven-and-hell-load-default-theme)
 		 ("<f6>" . heaven-and-hell-toggle-theme)))
@@ -434,6 +434,9 @@
 		 ("C-<" . mc/mark-previous-like-this)
 		 ("C-c C-<" . mc/mark-all-like-this)))
 
+(use-package platformio-mode
+      :ensure t)
+
 (use-package company :ensure t :init (global-company-mode))
 
 (use-package yasnippet :config (yas-global-mode))
@@ -458,16 +461,27 @@
 (use-package dap-java :ensure nil)
 
 (use-package lsp-treemacs
-  :after (lsp-mode treemacs)
-  :ensure t
-  :commands lsp-treemacs-errors-list
-  :bind (:map lsp-mode-map
-         ("M-9" . lsp-treemacs-errors-list)))
+      :after (lsp-mode treemacs)
+      :ensure t
+      :commands lsp-treemacs-errors-list
+      :bind (:map lsp-mode-map
+		 ("M-9" . lsp-treemacs-errors-list)))
+(use-package treemacs-projectile
+      :ensure t
+      :after (treemacs))
+
+(use-package treemacs-magit
+      :ensure t
+      :after (treemacs))
+
+(use-package treemacs-all-the-icons
+      :ensure t
+      :after (treemacs))
 
 (use-package treemacs
-  :ensure t
-  :commands (treemacs)
-  :after (lsp-mode))
+      :ensure t
+      :commands (treemacs)
+      :after (lsp-mode))
 
 (use-package lsp-ui
 :ensure t
@@ -525,6 +539,9 @@
 
 (add-hook 'js-mode-hook 'lsp)
 
+(use-package jsdoc
+      :ensure t)
+
 (use-package ob-typescript
       :ensure t)
 
@@ -557,7 +574,8 @@
 
 (use-package nix-mode :ensure t)
 
-(use-package rust-mode :ensure t :hook (rust-mode . cargo-minor-mode))
+(use-package rust-mode :ensure t :hook ((rust-mode . cargo-minor-mode)
+										(rust-mode . lsp)))
 (use-package flycheck-rust
       :ensure t)
 (with-eval-after-load 'rust-mode

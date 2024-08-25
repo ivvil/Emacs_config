@@ -209,8 +209,8 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
 	:init
 	(setq heaven-and-hell-theme-type 'dark)
 	(setq heaven-and-hell-themes
-		  '((light . solo-jazz)
-			(dark . doom-palenight)))
+		  '((light . doom-solarized-light)
+			(dark . doom-solarized-dark-high-contrast)))
 	:hook (after-init . heaven-and-hell-init-hook)
 	:bind (("C-c <f6>" . heaven-and-hell-load-default-theme)
 		   ("<f6>" . heaven-and-hell-toggle-theme)))
@@ -631,6 +631,13 @@ Add skewer mode for a live server
 		   ("C-c C-<" . mc/mark-all-like-this)))
 #+end_src
 
+** PlatformIO
+
+#+begin_src emacs-lisp
+  (use-package platformio-mode
+	:ensure t)
+#+end_src
+
 * Language Server Protocol (LSP)
   With above setup done, below we will setup several packages closely related to LSP.
 
@@ -682,17 +689,28 @@ Emacs Debug Adapter Protocol aka DAP Mode allows us to debug your program. Below
 ** Treemacs
 Treemacs provides UI elements used for LSP UI. Let's install lsp-treemacs and its dependency treemacs. We will also Assign ~M-9~ to show error list.
 #+begin_src emacs-lisp
-(use-package lsp-treemacs
-  :after (lsp-mode treemacs)
-  :ensure t
-  :commands lsp-treemacs-errors-list
-  :bind (:map lsp-mode-map
-         ("M-9" . lsp-treemacs-errors-list)))
+  (use-package lsp-treemacs
+	:after (lsp-mode treemacs)
+	:ensure t
+	:commands lsp-treemacs-errors-list
+	:bind (:map lsp-mode-map
+		   ("M-9" . lsp-treemacs-errors-list)))
+  (use-package treemacs-projectile
+	:ensure t
+	:after (treemacs))
 
-(use-package treemacs
-  :ensure t
-  :commands (treemacs)
-  :after (lsp-mode))
+  (use-package treemacs-magit
+	:ensure t
+	:after (treemacs))
+
+  (use-package treemacs-all-the-icons
+	:ensure t
+	:after (treemacs))
+
+  (use-package treemacs
+	:ensure t
+	:commands (treemacs)
+	:after (lsp-mode))
 #+end_src
 
 ** LSP UI
@@ -801,6 +819,13 @@ Pakcages for other languages and hooks
   (add-hook 'js-mode-hook 'lsp)
 #+end_src
 
+*** JSDoc
+
+#+begin_src emacs-lisp
+  (use-package jsdoc
+	:ensure t)
+#+end_src
+
 *** Typescript
 
 #+begin_src emacs-lisp
@@ -873,7 +898,8 @@ Adding better ~JSON~ mode
 ** Rust
 
 #+begin_src emacs-lisp
-  (use-package rust-mode :ensure t :hook (rust-mode . cargo-minor-mode))
+  (use-package rust-mode :ensure t :hook ((rust-mode . cargo-minor-mode)
+										  (rust-mode . lsp)))
   (use-package flycheck-rust
 	:ensure t)
   (with-eval-after-load 'rust-mode
@@ -990,7 +1016,6 @@ Testing corfu setup
   ;; (require 'eaf-vue-tailwindcss)
   ;; (require 'eaf-pyqterminal)
 #+end_src
-
 
 * Conclusion
 Go through [[https://github.com/emacs-lsp/lsp-java#supported-commands][Supported commands]] section of lsp-java github page to see commands provided in lsp-mode. Most of these commands are available under lsp's ~C-c l~ option. I hope this configuration file was useful.

@@ -13,10 +13,12 @@
 		helm-confirm-and-exit-minibuffer
 		ignore-preserving-kill-region
 		kill-region
+		lsp-execute-code-action
 		lsp-ui-doc--handle-mouse-movement
 		))
 
 (setq mc/cmds-to-run-once
       '(
 		end-of-buffer
+		lsp-execute-code-action
 		))
