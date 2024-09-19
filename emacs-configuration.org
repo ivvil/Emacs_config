@@ -192,6 +192,14 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
 #+end_src
 
 * Looks
+
+** Font
+
+#+begin_src emacs-lisp 
+(set-face-attribute 'default nil :font "CaskaydiaCove Nerd Font-10")
+(set-frame-font "CaskaydiaCove Nerd Font-10" nil t)
+#+end_src
+
 ** Theme
    I tend to like *doom-themes* package. Below we will install doom theme. In addition, I will also install a package called *heaven-and-hell*. This allows us to toggle between two themes using a shortcut key. I will assign ~F6~ key to toggling the theme and ~C-c F6~ to set to default theme.
 
@@ -458,10 +466,10 @@ We can use quickrun package to execute code (if it has main). E.g. If you have a
 A VC plugin that has github integrations
 #+begin_src emacs-lisp
   (use-package magit :ensure t)
-  (use-package magit-todos
-	:ensure t
-	:after magit
-	:config (magit-todos-mode 1))
+  ;; (use-package magit-todos
+  ;; 	:ensure t
+  ;; 	:after magit
+  ;; 	:config (magit-todos-mode 1))
   (setenv "TERM" "dumb")
 #+end_src
 
@@ -924,6 +932,12 @@ Adding better ~JSON~ mode
   (require 'dap-gdb-lldb)
 #+end_src
 
+** C#
+
+#+begin_src emacs-lisp
+  (add-hook 'csharp-mode-hook 'lsp)
+#+end_src
+
 * EXWM
 
 * TESTING
@@ -1019,5 +1033,3 @@ Testing corfu setup
 
 * Conclusion
 Go through [[https://github.com/emacs-lsp/lsp-java#supported-commands][Supported commands]] section of lsp-java github page to see commands provided in lsp-mode. Most of these commands are available under lsp's ~C-c l~ option. I hope this configuration file was useful.
-
-
