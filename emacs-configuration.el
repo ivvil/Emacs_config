@@ -98,7 +98,8 @@
 (use-package dashboard
       :ensure t
       :config
-      (dashboard-setup-startup-hook))
+      (dashboard-setup-startup-hook)
+      (setq dashboard-projects-backend 'projectile))
 (setq dashboard-display-icons-p t) ;; display icons on both GUI and terminal
 ;; (setq dashboard-icon-type 'nerd-icons) ;; use `nerd-icons' package
 (setq dashboard-icon-type 'all-the-icons) ;; use `all-the-icons' package
@@ -119,6 +120,17 @@
 						(projects . 5)
 						(agenda . 5)
 						(registers . 5)))
+
+(setq dashboard-startupify-list '(dashboard-insert-banner
+								      dashboard-insert-newline
+								      dashboard-insert-banner-title
+								      dashboard-insert-newline
+								      dashboard-insert-navigator
+								      dashboard-insert-newline
+								      dashboard-insert-init-info
+								      dashboard-insert-items
+								      dashboard-insert-newline
+								      dashboard-insert-footer))
 
 (use-package page-break-lines :ensure t)
 
@@ -247,6 +259,14 @@
 (use-package rainbow-delimiters
       :ensure t
       :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package page-break-lines
+      :ensure t
+      :init (global-page-break-lines-mode))
+
+;; (use-package solaire-mode
+;;   :ensure t
+;;   :init (solaire-global-mode +1))
 
 (use-package use-package-chords
       :ensure t
@@ -436,6 +456,24 @@
 
 (use-package platformio-mode
       :ensure t)
+
+(use-package org-roam
+      :ensure t
+      :custom
+      (org-roam-directory (file-truename "~/Documentos/Notas"))
+      :bind (("C-c n l" . org-roam-buffer-toggle)
+		 ("C-c n f" . org-roam-node-find)
+		 ("C-c n g" . org-roam-graph)
+		 ("C-c n i" . org-roam-node-insert)
+		 ("C-c n c" . org-roam-capture)
+		 ;; Dailies
+		 ("C-c n j" . org-roam-dailies-capture-today))
+      :config
+      ;; If you're using a vertical completion framework, you might want a more informative completion interface
+      (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+      (org-roam-db-autosync-mode)
+      ;; If using org-roam-protocol
+      (require 'org-roam-protocol))
 
 (use-package company :ensure t :init (global-company-mode))
 

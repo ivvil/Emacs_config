@@ -28,7 +28,7 @@
  '(lsp-java-vmargs
    '("-XX:+UseParallelGC" "-XX:GCTimeRatio=4" "-XX:AdaptiveSizePolicyWeight=90" "-Dsun.zip.disableMemoryMapping=true" "-Xmx1G" "-Xms100m" "--enable-preview"))
  '(package-selected-packages
-   '(lua-mode cmake-mode jsdoc platformio-mode treemacs-projectile treemacs-magit treemacs-all-the-icons markless magit-todos hl-todo solo-jazz-theme evil rainbow-mode rainbow-delimiters flycheck-rust typescript-mode ob-typescript yaml-mode xmlgen multiple-cursors emacsql org-modern nov dashboard minions doom-modeline sqlite3 emms sly corfu geiser-guile gdscript-mode lsp-java lsp-intellij helm-lsp lsp-ui dap-mode flycheck yasnippet-snippets company quickrun which-key avy helm-swoop helm-descbinds helm wfnames use-package-chords projectile popup helm-core heaven-and-hell exec-path-from-shell doom-themes)))
+   '(solaire-mode org-roam treemacs-nerd-icons lua-mode cmake-mode jsdoc platformio-mode treemacs-projectile treemacs-magit treemacs-all-the-icons markless magit-todos hl-todo solo-jazz-theme evil rainbow-mode rainbow-delimiters flycheck-rust typescript-mode ob-typescript yaml-mode xmlgen multiple-cursors emacsql org-modern nov dashboard minions doom-modeline sqlite3 emms sly corfu geiser-guile gdscript-mode lsp-java lsp-intellij helm-lsp lsp-ui dap-mode flycheck yasnippet-snippets company quickrun which-key avy helm-swoop helm-descbinds helm wfnames use-package-chords projectile popup helm-core heaven-and-hell exec-path-from-shell doom-themes)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

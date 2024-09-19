@@ -15,6 +15,8 @@
 		kill-region
 		lsp-execute-code-action
 		lsp-ui-doc--handle-mouse-movement
+		sgml-skip-tag-forward
+		sgml-slash
 		))
 
 (setq mc/cmds-to-run-once
