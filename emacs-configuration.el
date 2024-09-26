@@ -1,19 +1,19 @@
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-						 ("elpa" . "https://elpa.gnu.org/packages/")
-						 ("org" . "https://orgmode.org/elpa/")
-						 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-						 ))
+						   ("elpa" . "https://elpa.gnu.org/packages/")
+						   ("org" . "https://orgmode.org/elpa/")
+						   ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+						   ))
 
 (package-initialize)
-										; Fetch the list of packages available 
+										  ; Fetch the list of packages available 
 (unless package-archive-contents (package-refresh-contents))
 
-										; Install use-package
+										  ; Install use-package
 (setq package-list '(use-package))
 (dolist (package package-list)
-      (unless (package-installed-p package) (package-install package)))
+	(unless (package-installed-p package) (package-install package)))
 
 ;; (use-package exec-path-from-shell :ensure t)
 ;; (exec-path-from-shell-initialize)
@@ -52,14 +52,14 @@
 
 (setq user-cache-directory (concat EMACS_DIR "cache"))
 (setq backup-directory-alist `(("." . ,(expand-file-name "backups" user-cache-directory)))
-	      url-history-file (expand-file-name "url/history" user-cache-directory)
-	      auto-save-list-file-prefix (expand-file-name "auto-save-list/.saves-" user-cache-directory)
-	      projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" user-cache-directory))
+		url-history-file (expand-file-name "url/history" user-cache-directory)
+		auto-save-list-file-prefix (expand-file-name "auto-save-list/.saves-" user-cache-directory)
+		projectile-known-projects-file (expand-file-name "projectile-bookmarks.eld" user-cache-directory))
 
 ;; Org-mode issue with src block not expanding
 ;; This is a fix for bug in org-mode where <s TAB does not expand SRC block
 (when (version<= "9.2" (org-version))
-      (require 'org-tempo))
+	(require 'org-tempo))
 
 ;; Coding specific setting
 
@@ -80,26 +80,26 @@
 
 ;; Add other elisp files to ~load-path~
 (defun add-subdirectories-to-load-path (directory)
-      "Add subdirectories of DIRECTORY to the `load-path`."
-      (interactive "Directory: ")
-      (let ((default-directory (file-name-as-directory directory)))
-	(dolist (subdir (directory-files directory t "^[^.]" 'nosort))
-	      (when (file-directory-p subdir)
-		(add-to-list 'load-path subdir)))))
+	"Add subdirectories of DIRECTORY to the `load-path`."
+	(interactive "Directory: ")
+	(let ((default-directory (file-name-as-directory directory)))
+	  (dolist (subdir (directory-files directory t "^[^.]" 'nosort))
+		(when (file-directory-p subdir)
+		  (add-to-list 'load-path subdir)))))
 
 (add-subdirectories-to-load-path "~/.emacs.d/elisp")
 
 ;; Highlight todos
 (use-package hl-todo
-      :ensure t
-      :init (global-hl-todo-mode))
+	:ensure t
+	:init (global-hl-todo-mode))
 
 ;; use-package with package.el:
 (use-package dashboard
-      :ensure t
-      :config
-      (dashboard-setup-startup-hook)
-      (setq dashboard-projects-backend 'projectile))
+	:ensure t
+	:config
+	(dashboard-setup-startup-hook)
+	(setq dashboard-projects-backend 'projectile))
 (setq dashboard-display-icons-p t) ;; display icons on both GUI and terminal
 ;; (setq dashboard-icon-type 'nerd-icons) ;; use `nerd-icons' package
 (setq dashboard-icon-type 'all-the-icons) ;; use `all-the-icons' package
@@ -116,26 +116,26 @@
 ;; - a cons of '("path/to/your/image.png" . "path/to/your/text.txt")
 
 (setq dashboard-items '((recents  . 5)
-						(bookmarks . 5)
-						(projects . 5)
-						(agenda . 5)
-						(registers . 5)))
+						  (bookmarks . 5)
+						  (projects . 5)
+						  (agenda . 5)
+						  (registers . 5)))
 
 (setq dashboard-startupify-list '(dashboard-insert-banner
-								      dashboard-insert-newline
-								      dashboard-insert-banner-title
-								      dashboard-insert-newline
-								      dashboard-insert-navigator
-								      dashboard-insert-newline
-								      dashboard-insert-init-info
-								      dashboard-insert-items
-								      dashboard-insert-newline
-								      dashboard-insert-footer))
+									dashboard-insert-newline
+									dashboard-insert-banner-title
+									dashboard-insert-newline
+									dashboard-insert-navigator
+									dashboard-insert-newline
+									dashboard-insert-init-info
+									dashboard-insert-items
+									dashboard-insert-newline
+									dashboard-insert-footer))
 
 (use-package page-break-lines :ensure t)
 
 (use-package all-the-icons
-      :if (display-graphic-p) :ensure t)
+	:if (display-graphic-p) :ensure t)
 (use-package all-the-icons-dired :ensure t)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
@@ -152,24 +152,27 @@
 ;;   :ensure t)
 ;; (require 'which-linux-distribution)
 
+(set-face-attribute 'default nil :font "CaskaydiaCove Nerd Font-10")
+(set-frame-font "CaskaydiaCove Nerd Font-10" nil t)
+
 (use-package doom-themes
-      :ensure t 
-      :init 
-      (load-theme 'doom-palenight t))
+	:ensure t 
+	:init 
+	(load-theme 'doom-palenight t))
 
 (use-package solo-jazz-theme
-      :ensure t)
+	:ensure t)
 
 (use-package heaven-and-hell
-      :ensure t
-      :init
-      (setq heaven-and-hell-theme-type 'dark)
-      (setq heaven-and-hell-themes
-		'((light . doom-solarized-light)
-		      (dark . doom-solarized-dark-high-contrast)))
-      :hook (after-init . heaven-and-hell-init-hook)
-      :bind (("C-c <f6>" . heaven-and-hell-load-default-theme)
-		 ("<f6>" . heaven-and-hell-toggle-theme)))
+	:ensure t
+	:init
+	(setq heaven-and-hell-theme-type 'dark)
+	(setq heaven-and-hell-themes
+		  '((light . doom-solarized-light)
+			(dark . doom-solarized-dark-high-contrast)))
+	:hook (after-init . heaven-and-hell-init-hook)
+	:bind (("C-c <f6>" . heaven-and-hell-load-default-theme)
+		   ("<f6>" . heaven-and-hell-toggle-theme)))
 
 (defun my/ansi-colorize-buffer ()
 (let ((buffer-read-only nil))
@@ -182,99 +185,99 @@
 )
 
 (use-package ligature
-      :ensure t
-      :config
-      ;; Enable the "www" ligature in every possible major mode
-      (ligature-set-ligatures 't '("www"))
-      ;; Enable traditional ligature support in eww-mode, if the
-      ;; `variable-pitch' face supports it
-      (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
-      ;; Enable all Cascadia and Fira Code ligatures in programming modes
-      (ligature-set-ligatures 'prog-mode
-						      '(;; == === ==== => =| =>>=>=|=>==>> ==< =/=//=// =~
-							;; =:= =!=
-							("=" (rx (+ (or ">" "<" "|" "/" "~" ":" "!" "="))))
-							;; ;; ;;;
-							(";" (rx (+ ";")))
-							;; && &&&
-							("&" (rx (+ "&")))
-							;; !! !!! !. !: !!. != !== !~
-							("!" (rx (+ (or "=" "!" "\." ":" "~"))))
-							;; ?? ??? ?:  ?=  ?.
-							("?" (rx (or ":" "=" "\." (+ "?"))))
-							;; %% %%%
-							("%" (rx (+ "%")))
-							;; |> ||> |||> ||||> |] |} || ||| |-> ||-||
-							;; |->>-||-<<-| |- |== ||=||
-							;; |==>>==<<==<=>==//==/=!==:===>
-							("|" (rx (+ (or ">" "<" "|" "/" ":" "!" "}" "\]"
-											"-" "=" ))))
-							;; \\ \\\ \/
-							("\\" (rx (or "/" (+ "\\"))))
-							;; ++ +++ ++++ +>
-							("+" (rx (or ">" (+ "+"))))
-							;; :: ::: :::: :> :< := :// ::=
-							(":" (rx (or ">" "<" "=" "//" ":=" (+ ":"))))
-							;; // /// //// /\ /* /> /===:===!=//===>>==>==/
-							("/" (rx (+ (or ">"  "<" "|" "/" "\\" "\*" ":" "!"
-											"="))))
-							;; .. ... .... .= .- .? ..= ..<
-							("\." (rx (or "=" "-" "\?" "\.=" "\.<" (+ "\."))))
-							;; -- --- ---- -~ -> ->> -| -|->-->>->--<<-|
-							("-" (rx (+ (or ">" "<" "|" "~" "-"))))
-							;; *> */ *)  ** *** ****
-							("*" (rx (or ">" "/" ")" (+ "*"))))
-							;; www wwww
-							("w" (rx (+ "w")))
-							;; <> <!-- <|> <: <~ <~> <~~ <+ <* <$ </  <+> <*>
-							;; <$> </> <|  <||  <||| <|||| <- <-| <-<<-|-> <->>
-							;; <<-> <= <=> <<==<<==>=|=>==/==//=!==:=>
-							;; << <<< <<<<
-							("<" (rx (+ (or "\+" "\*" "\$" "<" ">" ":" "~"  "!"
-											"-"  "/" "|" "="))))
-							;; >: >- >>- >--|-> >>-|-> >= >== >>== >=|=:=>>
-							;; >> >>> >>>>
-							(">" (rx (+ (or ">" "<" "|" "/" ":" "=" "-"))))
-							;; #: #= #! #( #? #[ #{ #_ #_( ## ### #####
-							("#" (rx (or ":" "=" "!" "(" "\?" "\[" "{" "_(" "_"
-										 (+ "#"))))
-							;; ~~ ~~~ ~=  ~-  ~@ ~> ~~>
-							("~" (rx (or ">" "=" "-" "@" "~>" (+ "~"))))
-							;; __ ___ ____ _|_ __|____|_
-							("_" (rx (+ (or "_" "|"))))
-							;; Fira code: 0xFF 0x12
-							;; ("0" (rx (and "x" (+ (in "A-F" "a-f" "0-9")))))
-							;; Fira code:
-							;; "Fl"  "Tl"  "fi"  "fj"  "fl"  "ft"
-							;; The few not covered by the regexps.
-							"{|"  "[|"  "]#"  "(*"  "}#"  "$>"  "^="))
-      ;; Enables ligature checks globally in all buffers. You can also do it
-      ;; per mode with `ligature-mode'.
-      (global-ligature-mode t))
+	:ensure t
+	:config
+	;; Enable the "www" ligature in every possible major mode
+	(ligature-set-ligatures 't '("www"))
+	;; Enable traditional ligature support in eww-mode, if the
+	;; `variable-pitch' face supports it
+	(ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+	;; Enable all Cascadia and Fira Code ligatures in programming modes
+	(ligature-set-ligatures 'prog-mode
+							'(;; == === ==== => =| =>>=>=|=>==>> ==< =/=//=// =~
+							  ;; =:= =!=
+							  ("=" (rx (+ (or ">" "<" "|" "/" "~" ":" "!" "="))))
+							  ;; ;; ;;;
+							  (";" (rx (+ ";")))
+							  ;; && &&&
+							  ("&" (rx (+ "&")))
+							  ;; !! !!! !. !: !!. != !== !~
+							  ("!" (rx (+ (or "=" "!" "\." ":" "~"))))
+							  ;; ?? ??? ?:  ?=  ?.
+							  ("?" (rx (or ":" "=" "\." (+ "?"))))
+							  ;; %% %%%
+							  ("%" (rx (+ "%")))
+							  ;; |> ||> |||> ||||> |] |} || ||| |-> ||-||
+							  ;; |->>-||-<<-| |- |== ||=||
+							  ;; |==>>==<<==<=>==//==/=!==:===>
+							  ("|" (rx (+ (or ">" "<" "|" "/" ":" "!" "}" "\]"
+											  "-" "=" ))))
+							  ;; \\ \\\ \/
+							  ("\\" (rx (or "/" (+ "\\"))))
+							  ;; ++ +++ ++++ +>
+							  ("+" (rx (or ">" (+ "+"))))
+							  ;; :: ::: :::: :> :< := :// ::=
+							  (":" (rx (or ">" "<" "=" "//" ":=" (+ ":"))))
+							  ;; // /// //// /\ /* /> /===:===!=//===>>==>==/
+							  ("/" (rx (+ (or ">"  "<" "|" "/" "\\" "\*" ":" "!"
+											  "="))))
+							  ;; .. ... .... .= .- .? ..= ..<
+							  ("\." (rx (or "=" "-" "\?" "\.=" "\.<" (+ "\."))))
+							  ;; -- --- ---- -~ -> ->> -| -|->-->>->--<<-|
+							  ("-" (rx (+ (or ">" "<" "|" "~" "-"))))
+							  ;; *> */ *)  ** *** ****
+							  ("*" (rx (or ">" "/" ")" (+ "*"))))
+							  ;; www wwww
+							  ("w" (rx (+ "w")))
+							  ;; <> <!-- <|> <: <~ <~> <~~ <+ <* <$ </  <+> <*>
+							  ;; <$> </> <|  <||  <||| <|||| <- <-| <-<<-|-> <->>
+							  ;; <<-> <= <=> <<==<<==>=|=>==/==//=!==:=>
+							  ;; << <<< <<<<
+							  ("<" (rx (+ (or "\+" "\*" "\$" "<" ">" ":" "~"  "!"
+											  "-"  "/" "|" "="))))
+							  ;; >: >- >>- >--|-> >>-|-> >= >== >>== >=|=:=>>
+							  ;; >> >>> >>>>
+							  (">" (rx (+ (or ">" "<" "|" "/" ":" "=" "-"))))
+							  ;; #: #= #! #( #? #[ #{ #_ #_( ## ### #####
+							  ("#" (rx (or ":" "=" "!" "(" "\?" "\[" "{" "_(" "_"
+										   (+ "#"))))
+							  ;; ~~ ~~~ ~=  ~-  ~@ ~> ~~>
+							  ("~" (rx (or ">" "=" "-" "@" "~>" (+ "~"))))
+							  ;; __ ___ ____ _|_ __|____|_
+							  ("_" (rx (+ (or "_" "|"))))
+							  ;; Fira code: 0xFF 0x12
+							  ;; ("0" (rx (and "x" (+ (in "A-F" "a-f" "0-9")))))
+							  ;; Fira code:
+							  ;; "Fl"  "Tl"  "fi"  "fj"  "fl"  "ft"
+							  ;; The few not covered by the regexps.
+							  "{|"  "[|"  "]#"  "(*"  "}#"  "$>"  "^="))
+	;; Enables ligature checks globally in all buffers. You can also do it
+	;; per mode with `ligature-mode'.
+	(global-ligature-mode t))
 
 (use-package doom-modeline
 :ensure t
 :init (doom-modeline-mode))
 
 (use-package rainbow-delimiters
-      :ensure t
-      :hook (prog-mode . rainbow-delimiters-mode))
+	:ensure t
+	:hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package page-break-lines
-      :ensure t
-      :init (global-page-break-lines-mode))
+	:ensure t
+	:init (global-page-break-lines-mode))
 
 ;; (use-package solaire-mode
 ;;   :ensure t
 ;;   :init (solaire-global-mode +1))
 
 (use-package use-package-chords
-      :ensure t
-      :init 
-      :config (key-chord-mode 1)
-      (setq key-chord-two-keys-delay 0.4)
-      (setq key-chord-one-key-delay 0.5) ; default 0.2
-      )
+	:ensure t
+	:init 
+	:config (key-chord-mode 1)
+	(setq key-chord-two-keys-delay 0.4)
+	(setq key-chord-one-key-delay 0.5) ; default 0.2
+	)
 
 (use-package projectile 
 :ensure t
@@ -349,14 +352,14 @@
 :bind ("C-c r" . quickrun))
 
 (use-package magit :ensure t)
-(use-package magit-todos
-      :ensure t
-      :after magit
-      :config (magit-todos-mode 1))
+;; (use-package magit-todos
+;; 	:ensure t
+;; 	:after magit
+;; 	:config (magit-todos-mode 1))
 (setenv "TERM" "dumb")
 
 (use-package envrc :ensure t
-      :init (envrc-mode))
+	:init (envrc-mode))
 
 (use-package vterm :ensure t)
 (use-package eshell-vterm :ensure t)
@@ -437,8 +440,8 @@
 ;; :init (minions-mode))
 
 (use-package org-modern
-      :ensure t
-      :init (global-org-modern-mode))
+	:ensure t
+	:init (global-org-modern-mode))
 
 (use-package cdlatex
   :ensure t
@@ -448,32 +451,32 @@
 (setq sqlplus-connect-string "sys/test@//localhost:1521/xe as sysdba")
 
 (use-package multiple-cursors
-      :ensure t
-      :bind (("C-S-c C-S-c" . mc/edit-lines)
-		 ("C->" . mc/mark-next-like-this)
-		 ("C-<" . mc/mark-previous-like-this)
-		 ("C-c C-<" . mc/mark-all-like-this)))
+	:ensure t
+	:bind (("C-S-c C-S-c" . mc/edit-lines)
+		   ("C->" . mc/mark-next-like-this)
+		   ("C-<" . mc/mark-previous-like-this)
+		   ("C-c C-<" . mc/mark-all-like-this)))
 
 (use-package platformio-mode
-      :ensure t)
+	:ensure t)
 
 (use-package org-roam
-      :ensure t
-      :custom
-      (org-roam-directory (file-truename "~/Documentos/Notas"))
-      :bind (("C-c n l" . org-roam-buffer-toggle)
-		 ("C-c n f" . org-roam-node-find)
-		 ("C-c n g" . org-roam-graph)
-		 ("C-c n i" . org-roam-node-insert)
-		 ("C-c n c" . org-roam-capture)
-		 ;; Dailies
-		 ("C-c n j" . org-roam-dailies-capture-today))
-      :config
-      ;; If you're using a vertical completion framework, you might want a more informative completion interface
-      (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-      (org-roam-db-autosync-mode)
-      ;; If using org-roam-protocol
-      (require 'org-roam-protocol))
+	:ensure t
+	:custom
+	(org-roam-directory (file-truename "~/Documentos/Notas"))
+	:bind (("C-c n l" . org-roam-buffer-toggle)
+		   ("C-c n f" . org-roam-node-find)
+		   ("C-c n g" . org-roam-graph)
+		   ("C-c n i" . org-roam-node-insert)
+		   ("C-c n c" . org-roam-capture)
+		   ;; Dailies
+		   ("C-c n j" . org-roam-dailies-capture-today))
+	:config
+	;; If you're using a vertical completion framework, you might want a more informative completion interface
+	(setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+	(org-roam-db-autosync-mode)
+	;; If using org-roam-protocol
+	(require 'org-roam-protocol))
 
 (use-package company :ensure t :init (global-company-mode))
 
@@ -484,42 +487,42 @@
 (setq ispell-default-dicctionary "es")
 
 (use-package dap-mode
-      :ensure t
-      :after (lsp-mode)
-      :functions dap-hydra/nil
-      :config
-      (require 'dap-java)
-      :bind (:map lsp-mode-map
-		 ("<f5>" . dap-debug)
-		 ("M-<f5>" . dap-hydra))
-      :hook ((dap-mode . dap-ui-mode)
-	(dap-session-created . (lambda (&_rest) (dap-hydra)))
-	(dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))
+	:ensure t
+	:after (lsp-mode)
+	:functions dap-hydra/nil
+	:config
+	(require 'dap-java)
+	:bind (:map lsp-mode-map
+		   ("<f5>" . dap-debug)
+		   ("M-<f5>" . dap-hydra))
+	:hook ((dap-mode . dap-ui-mode)
+	  (dap-session-created . (lambda (&_rest) (dap-hydra)))
+	  (dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))
 
 (use-package dap-java :ensure nil)
 
 (use-package lsp-treemacs
-      :after (lsp-mode treemacs)
-      :ensure t
-      :commands lsp-treemacs-errors-list
-      :bind (:map lsp-mode-map
-		 ("M-9" . lsp-treemacs-errors-list)))
+	:after (lsp-mode treemacs)
+	:ensure t
+	:commands lsp-treemacs-errors-list
+	:bind (:map lsp-mode-map
+		   ("M-9" . lsp-treemacs-errors-list)))
 (use-package treemacs-projectile
-      :ensure t
-      :after (treemacs))
+	:ensure t
+	:after (treemacs))
 
 (use-package treemacs-magit
-      :ensure t
-      :after (treemacs))
+	:ensure t
+	:after (treemacs))
 
 (use-package treemacs-all-the-icons
-      :ensure t
-      :after (treemacs))
+	:ensure t
+	:after (treemacs))
 
 (use-package treemacs
-      :ensure t
-      :commands (treemacs)
-      :after (lsp-mode))
+	:ensure t
+	:commands (treemacs)
+	:after (lsp-mode))
 
 (use-package lsp-ui
 :ensure t
@@ -541,24 +544,24 @@
 (use-package lsp-mode
 :ensure t
 :hook (
-       (lsp-mode . lsp-enable-which-key-integration)
-       (java-mode . #'lsp-deferred)
-       (latex-mode . #'lsp-deferred)
-       (gdscript-mode . #'lsp-deferred)
-       (css-mode . #'lsp-deferred)
+	 (lsp-mode . lsp-enable-which-key-integration)
+	 (java-mode . #'lsp-deferred)
+	 (latex-mode . #'lsp-deferred)
+	 (gdscript-mode . #'lsp-deferred)
+	 (css-mode . #'lsp-deferred)
 )
 :init (setq 
-	lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
-	lsp-enable-file-watchers nil
-	read-process-output-max (* 1024 1024)  ; 1 mb
-	lsp-completion-provider :capf
-	lsp-idle-delay 0.500
+	  lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
+	  lsp-enable-file-watchers nil
+	  read-process-output-max (* 1024 1024)  ; 1 mb
+	  lsp-completion-provider :capf
+	  lsp-idle-delay 0.500
 )
 :config 
-	(setq lsp-intelephense-multi-root nil) ; don't scan unnecessary projects
-	(with-eval-after-load 'lsp-intelephense
-	(setf (lsp--client-multi-root (gethash 'iph lsp-clients)) nil))
-	(define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+	  (setq lsp-intelephense-multi-root nil) ; don't scan unnecessary projects
+	  (with-eval-after-load 'lsp-intelephense
+	  (setf (lsp--client-multi-root (gethash 'iph lsp-clients)) nil))
+	  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
 )
 
 (setq dap-auto-configure-features '(sessions locals controls tooltip))
@@ -577,23 +580,29 @@
 
 (add-hook 'js-mode-hook 'lsp)
 
+(require 'ob-js)
+
+(add-to-list 'org-babel-load-languages '(js . t))
+(org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+(add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
+
 (use-package jsdoc
-      :ensure t)
+	:ensure t)
 
 (use-package ob-typescript
-      :ensure t)
+	:ensure t)
 
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((typescript . t)
-       ))
+	 ))
 
 (setq org-babel-command:typescript "npx -p typescript -- tsc")
 
 (use-package json-mode :ensure t)
 
 (add-hook 'scss-mode-hook
-		      (lambda () ((skewer-reload-stylesheets-reload-on-save)(skewer-reload-stylesheets-start-editing))))
+			(lambda () ((skewer-reload-stylesheets-reload-on-save)(skewer-reload-stylesheets-start-editing))))
 
 (use-package sly :ensure t)
 (setq inferior-lisp-program "sbcl")
@@ -608,27 +617,29 @@
 (setq-default TeX-engine 'xetex)
 
 (use-package markless
-      :ensure t)
+	:ensure t)
 
 (use-package nix-mode :ensure t)
 (setf lsp-nix-nil-formatter ["alejandra"])
 
 (use-package rust-mode :ensure t :hook ((rust-mode . cargo-minor-mode)
-										(rust-mode . lsp)))
+										  (rust-mode . lsp)))
 (use-package flycheck-rust
-      :ensure t)
+	:ensure t)
 (with-eval-after-load 'rust-mode
-      (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+	(add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 (use-package gdscript-mode :ensure t)
 
 (use-package ccls
-      :ensure t)
+	:ensure t)
 (setq ccls-executable "/run/current-system/sw/bin/ccls")
 
 (require 'dap-lldb)
 (require 'dap-cpptools)
 (require 'dap-gdb-lldb)
+
+(add-hook 'csharp-mode-hook 'lsp)
 
 ;;  ;;;; Code Completion
 

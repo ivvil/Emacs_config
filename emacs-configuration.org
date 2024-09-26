@@ -875,6 +875,12 @@ Pakcages for other languages and hooks
 
 #+begin_src emacs-lisp
   (add-hook 'js-mode-hook 'lsp)
+
+  (require 'ob-js)
+
+  (add-to-list 'org-babel-load-languages '(js . t))
+  (org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+  (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
 #+end_src
 
 *** JSDoc
