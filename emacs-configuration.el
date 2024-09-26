@@ -611,6 +611,7 @@
       :ensure t)
 
 (use-package nix-mode :ensure t)
+(setf lsp-nix-nil-formatter ["alejandra"])
 
 (use-package rust-mode :ensure t :hook ((rust-mode . cargo-minor-mode)
 										(rust-mode . lsp)))
