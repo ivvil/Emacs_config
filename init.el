@@ -39,17 +39,19 @@
 	 "--enable-preview"))
  '(package-selected-packages
    '(ac-geiser all-the-icons-dired auto-complete-auctex ccls cdlatex
-			   company-auctex dashboard doom-modeline doom-themes
-			   elcord envrc eshell-vterm flycheck-rust gdscript-mode
-			   geiser-guile heaven-and-hell helm-descbinds helm-lsp
-			   helm-swoop helm-tramp jsdoc json-mode ligature lsp-java
-			   lsp-ui magit-todos markless multiple-cursors nix-mode
-			   ob-typescript org-modern org-roam page-break-lines
-			   platformio-mode prettier quickrun rainbow-delimiters
-			   rust-mode skewer-reload-stylesheets sly smart-compile
+			   company-auctex dashboard docker dockerfile-mode
+			   doom-modeline doom-themes elcord envrc
+			   eshell-syntax-highlighting eshell-vterm flycheck-rust
+			   gdscript-mode geiser-guile heaven-and-hell
+			   helm-descbinds helm-lsp helm-swoop helm-tramp hl-todo
+			   jsdoc json-mode ligature lsp-java lsp-ui markless
+			   multiple-cursors nix-mode ob-typescript org-modern
+			   org-roam page-break-lines php-mode platformio-mode
+			   prettier quickrun rainbow-delimiters rust-mode
+			   skewer-reload-stylesheets sly smart-compile
 			   solo-jazz-theme svelte-mode treemacs-all-the-icons
 			   treemacs-magit treemacs-projectile undo-tree
-			   use-package-chords yasnippet-snippets)))
+			   use-package-chords yaml-mode yasnippet-snippets)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

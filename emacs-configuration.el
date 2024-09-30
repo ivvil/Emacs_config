@@ -478,6 +478,13 @@
 	;; If using org-roam-protocol
 	(require 'org-roam-protocol))
 
+(use-package eshell-syntax-highlighting
+  :after eshell-mode
+  :ensure t ;; Install if not already installed.
+  :config
+  ;; Enable in all Eshell buffers.
+  (eshell-syntax-highlighting-global-mode +1))
+
 (use-package company :ensure t :init (global-company-mode))
 
 (use-package yasnippet :config (yas-global-mode))
