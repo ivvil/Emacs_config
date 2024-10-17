@@ -258,75 +258,75 @@ If you press F6 key in your keyboard, it should switch between doom-palenight an
 
 #+begin_src emacs-lisp
   (use-package ligature
-	:ensure t
-	:config
-	;; Enable the "www" ligature in every possible major mode
-	(ligature-set-ligatures 't '("www"))
-	;; Enable traditional ligature support in eww-mode, if the
-	;; `variable-pitch' face supports it
-	(ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
-	;; Enable all Cascadia and Fira Code ligatures in programming modes
-	(ligature-set-ligatures 'prog-mode
-							'(;; == === ==== => =| =>>=>=|=>==>> ==< =/=//=// =~
-							  ;; =:= =!=
-							  ("=" (rx (+ (or ">" "<" "|" "/" "~" ":" "!" "="))))
-							  ;; ;; ;;;
-							  (";" (rx (+ ";")))
-							  ;; && &&&
-							  ("&" (rx (+ "&")))
-							  ;; !! !!! !. !: !!. != !== !~
-							  ("!" (rx (+ (or "=" "!" "\." ":" "~"))))
-							  ;; ?? ??? ?:  ?=  ?.
-							  ("?" (rx (or ":" "=" "\." (+ "?"))))
-							  ;; %% %%%
-							  ("%" (rx (+ "%")))
-							  ;; |> ||> |||> ||||> |] |} || ||| |-> ||-||
-							  ;; |->>-||-<<-| |- |== ||=||
-							  ;; |==>>==<<==<=>==//==/=!==:===>
-							  ("|" (rx (+ (or ">" "<" "|" "/" ":" "!" "}" "\]"
-											  "-" "=" ))))
-							  ;; \\ \\\ \/
-							  ("\\" (rx (or "/" (+ "\\"))))
-							  ;; ++ +++ ++++ +>
-							  ("+" (rx (or ">" (+ "+"))))
-							  ;; :: ::: :::: :> :< := :// ::=
-							  (":" (rx (or ">" "<" "=" "//" ":=" (+ ":"))))
-							  ;; // /// //// /\ /* /> /===:===!=//===>>==>==/
-							  ("/" (rx (+ (or ">"  "<" "|" "/" "\\" "\*" ":" "!"
-											  "="))))
-							  ;; .. ... .... .= .- .? ..= ..<
-							  ("\." (rx (or "=" "-" "\?" "\.=" "\.<" (+ "\."))))
-							  ;; -- --- ---- -~ -> ->> -| -|->-->>->--<<-|
-							  ("-" (rx (+ (or ">" "<" "|" "~" "-"))))
-							  ;; *> */ *)  ** *** ****
-							  ("*" (rx (or ">" "/" ")" (+ "*"))))
-							  ;; www wwww
-							  ("w" (rx (+ "w")))
-							  ;; <> <!-- <|> <: <~ <~> <~~ <+ <* <$ </  <+> <*>
-							  ;; <$> </> <|  <||  <||| <|||| <- <-| <-<<-|-> <->>
-							  ;; <<-> <= <=> <<==<<==>=|=>==/==//=!==:=>
-							  ;; << <<< <<<<
-							  ("<" (rx (+ (or "\+" "\*" "\$" "<" ">" ":" "~"  "!"
-											  "-"  "/" "|" "="))))
-							  ;; >: >- >>- >--|-> >>-|-> >= >== >>== >=|=:=>>
-							  ;; >> >>> >>>>
-							  (">" (rx (+ (or ">" "<" "|" "/" ":" "=" "-"))))
-							  ;; #: #= #! #( #? #[ #{ #_ #_( ## ### #####
-							  ("#" (rx (or ":" "=" "!" "(" "\?" "\[" "{" "_(" "_"
-										   (+ "#"))))
-							  ;; ~~ ~~~ ~=  ~-  ~@ ~> ~~>
-							  ("~" (rx (or ">" "=" "-" "@" "~>" (+ "~"))))
-							  ;; __ ___ ____ _|_ __|____|_
-							  ("_" (rx (+ (or "_" "|"))))
-							  ;; Fira code: 0xFF 0x12
-							  ;; ("0" (rx (and "x" (+ (in "A-F" "a-f" "0-9")))))
-							  ;; Fira code:
-							  ;; "Fl"  "Tl"  "fi"  "fj"  "fl"  "ft"
-							  ;; The few not covered by the regexps.
-							  "{|"  "[|"  "]#"  "(*"  "}#"  "$>"  "^="))
-	;; Enables ligature checks globally in all buffers. You can also do it
-	;; per mode with `ligature-mode'.
-	(global-ligature-mode t))
+    :ensure t
+    :config
+    ;; Enable the "www" ligature in every possible major mode
+    (ligature-set-ligatures 't '("www"))
+    ;; Enable traditional ligature support in eww-mode, if the
+    ;; `variable-pitch' face supports it
+    (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+    ;; Enable all Cascadia and Fira Code ligatures in programming modes
+    (ligature-set-ligatures 'prog-mode
+  						  '(;; == === ==== => =| =>>=>=|=>==>> ==< =/=//=// =~
+  							;; =:= =!=
+  							("=" (rx (+ (or ">" "<" "|" "/" "~" ":" "!" "="))))
+  							;; ;; ;;;
+  							(";" (rx (+ ";")))
+  							;; && &&&
+  							("&" (rx (+ "&")))
+  							;; !! !!! !. !: !!. != !== !~
+  							("!" (rx (+ (or "=" "!" "\." ":" "~"))))
+  							;; ?? ??? ?:  ?=  ?.
+  							("?" (rx (or ":" "=" "\." (+ "?"))))
+  							;; %% %%%
+  							("%" (rx (+ "%")))
+  							;; |> ||> |||> ||||> |] |} || ||| |-> ||-||
+  							;; |->>-||-<<-| |- |== ||=||
+  							;; |==>>==<<==<=>==//==/=!==:===>
+  							("|" (rx (+ (or ">" "<" "|" "/" ":" "!" "}" "\]"
+  											"-" "=" ))))
+  							;; \\ \\\ \/
+  							("\\" (rx (or "/" (+ "\\"))))
+  							;; ++ +++ ++++ +>
+  							("+" (rx (or ">" (+ "+"))))
+  							;; :: ::: :::: :> :< := :// ::=
+  							(":" (rx (or ">" "<" "=" "//" ":=" (+ ":"))))
+  							;; // /// //// /\ /* /> /===:===!=//===>>==>==/
+  							("/" (rx (+ (or ">"  "<" "|" "/" "\\" "\*" ":" "!"
+  											"="))))
+  							;; .. ... .... .= .- .? ..= ..<
+  							("\." (rx (or "=" "-" "\?" "\.=" "\.<" (+ "\."))))
+  							;; -- --- ---- -~ -> ->> -| -|->-->>->--<<-|
+  							("-" (rx (+ (or ">" "<" "|" "~" "-"))))
+  							;; *> */ *)  ** *** ****
+  							("*" (rx (or ">" "/" ")" (+ "*"))))
+  							;; www wwww
+  							("w" (rx (+ "w")))
+  							;; <> <!-- <|> <: <~ <~> <~~ <+ <* <$ </  <+> <*>
+  							;; <$> </> <|  <||  <||| <|||| <- <-| <-<<-|-> <->>
+  							;; <<-> <= <=> <<==<<==>=|=>==/==//=!==:=>
+  							;; << <<< <<<<
+  							("<" (rx (+ (or "\+" "\*" "\$" "<" ">" ":" "~"  "!"
+  											"-"  "/" "|" "="))))
+  							;; >: >- >>- >--|-> >>-|-> >= >== >>== >=|=:=>>
+  							;; >> >>> >>>>
+  							(">" (rx (+ (or ">" "<" "|" "/" ":" "=" "-"))))
+  							;; #: #= #! #( #? #[ #{ #_ #_( ## ### #####
+  							("#" (rx (or ":" "=" "!" "(" "\?" "\[" "{" "_(" "_"
+  										 (+ "#"))))
+  							;; ~~ ~~~ ~=  ~-  ~@ ~> ~~>
+  							("~" (rx (or ">" "=" "-" "@" "~>" (+ "~"))))
+  							;; __ ___ ____ _|_ __|____|_
+  							("_" (rx (+ (or "_" "|"))))
+  							;; Fira code: 0xFF 0x12
+  							;; ("0" (rx (and "x" (+ (in "A-F" "a-f" "0-9")))))
+  							;; Fira code:
+  							;; "Fl"  "Tl"  "fi"  "fj"  "fl"  "ft"
+  							;; The few not covered by the regexps.
+  							"{|"  "[|"  "]#"  "(*"  "}#"  "$>"  "^="))
+    ;; Enables ligature checks globally in all buffers. You can also do it
+    ;; per mode with `ligature-mode'.
+    (global-ligature-mode t))
 #+end_src
 
 ** Doom modeline
@@ -707,7 +707,6 @@ Add skewer mode for a live server
     (eshell-syntax-highlighting-global-mode +1))
 #+end_src
 
-
 * Language Server Protocol (LSP)
   With above setup done, below we will setup several packages closely related to LSP.
 
@@ -880,7 +879,14 @@ Pakcages for other languages and hooks
 **** Astro
 
 #+begin_src emacs-lisp
-  ;; (use-package astro-ts-mode :ensure t)
+  (use-package web-mode
+    :ensure t)
+
+  ;; ASTRO
+  (define-derived-mode astro-mode web-mode "astro")
+  (setq auto-mode-alist
+        (append '((".*\\.astro\\'" . astro-mode))
+                auto-mode-alist))
 #+end_src
 
 ** JavaScript

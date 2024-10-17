@@ -21,7 +21,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
- '(custom-enabled-themes '(doom-solarized-light))
+ '(custom-enabled-themes '(doom-solarized-dark-high-contrast))
  '(custom-safe-themes
    '("9013233028d9798f901e5e8efb31841c24c12444d3b6e92580080505d56fd392"
 	 "10e5d4cc0f67ed5cafac0f4252093d2119ee8b8cb449e7053273453c1a1eb7cc"
@@ -39,19 +39,18 @@
 	 "--enable-preview"))
  '(package-selected-packages
    '(ac-geiser all-the-icons-dired auto-complete-auctex ccls cdlatex
-			   company-auctex dashboard docker dockerfile-mode
-			   doom-modeline doom-themes elcord envrc
-			   eshell-syntax-highlighting eshell-vterm flycheck-rust
-			   gdscript-mode geiser-guile heaven-and-hell
-			   helm-descbinds helm-lsp helm-swoop helm-tramp hl-todo
-			   jsdoc json-mode ligature lsp-java lsp-ui markless
-			   multiple-cursors nix-mode ob-typescript org-modern
-			   org-roam page-break-lines php-mode platformio-mode
-			   prettier quickrun rainbow-delimiters rust-mode
-			   skewer-reload-stylesheets sly smart-compile
+			   company-auctex dashboard doom-modeline doom-themes
+			   elcord envrc eshell-syntax-highlighting eshell-vterm
+			   flycheck-rust gdscript-mode geiser-guile
+			   heaven-and-hell helm-descbinds helm-lsp helm-swoop
+			   helm-tramp hl-todo jsdoc json-mode ligature lsp-java
+			   lsp-ui markless meson-mode multiple-cursors nix-mode
+			   ob-typescript org-modern org-roam page-break-lines
+			   platformio-mode prettier quickrun rainbow-delimiters
+			   rust-mode skewer-reload-stylesheets sly smart-compile
 			   solo-jazz-theme svelte-mode treemacs-all-the-icons
 			   treemacs-magit treemacs-projectile undo-tree
-			   use-package-chords yaml-mode yasnippet-snippets)))
+			   use-package-chords web-mode yasnippet-snippets)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
