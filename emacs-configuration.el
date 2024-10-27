@@ -583,9 +583,17 @@
 
 (use-package svelte-mode :ensure t)
 
-;; (use-package astro-ts-mode :ensure t)
+(use-package web-mode
+  :ensure t)
+
+;; ASTRO
+(define-derived-mode astro-mode web-mode "astro")
+(setq auto-mode-alist
+      (append '((".*\\.astro\\'" . astro-mode))
+              auto-mode-alist))
 
 (add-hook 'js-mode-hook 'lsp)
+(use-package typescript-mode :ensure t)
 
 (require 'ob-js)
 
@@ -627,7 +635,13 @@
 	:ensure t)
 
 (use-package nix-mode :ensure t)
-(setf lsp-nix-nil-formatter ["alejandra"])
+(with-eval-after-load 'lsp-mode
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "nixd")
+                    :major-modes '(nix-mode)
+                    :priority 0
+                    :server-id 'nixd)))
+(setf lsp-nixd-formatting-command ["alejandra"])
 
 (use-package rust-mode :ensure t :hook ((rust-mode . cargo-minor-mode)
 										  (rust-mode . lsp)))
@@ -638,9 +652,11 @@
 
 (use-package gdscript-mode :ensure t)
 
-(use-package ccls
-	:ensure t)
-(setq ccls-executable "/run/current-system/sw/bin/ccls")
+;; (use-package ccls
+;;   :hook ((c-mode c++-mode objc-mode cuda-mode) .
+;;          (lambda () (require 'ccls) (lsp))))
+
+(setq lsp-disabled-clients '(ccls))
 
 (require 'dap-lldb)
 (require 'dap-cpptools)
