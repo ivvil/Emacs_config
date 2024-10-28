@@ -389,6 +389,7 @@ Here, we changed the delay for the consecutive key to be little higher than defa
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 )   
 #+end_src
+
 ** Helm
 Helm allows for easy completion of commands. Below, we will replace several of the built in functions with helm versions and add keyboard shortcuts for couple of new useful commands.
 
@@ -482,6 +483,7 @@ For some prefix commands like ~C-c p~ or ~C-c h~ we want Emacs to visually guide
 (which-key-mode)
 )
 #+end_src
+
 ** Run Code
 We can use quickrun package to execute code (if it has main). E.g. If you have a java file with main method, it will run with the associated shortcut key ~C-c r~ or quickrun command. Quickrun has support for several languages.
 #+begin_src emacs-lisp
@@ -1000,7 +1002,6 @@ Adding better ~JSON~ mode
 #+begin_src emacs-lisp
   (use-package ccls
 	:ensure t)
-  (setq ccls-executable "/run/current-system/sw/bin/ccls")
 
   (require 'dap-lldb)
   (require 'dap-cpptools)
@@ -1011,6 +1012,13 @@ Adding better ~JSON~ mode
 
 #+begin_src emacs-lisp
   (add-hook 'csharp-mode-hook 'lsp)
+#+end_src
+
+** PHP
+
+#+begin_src emacs-lisp 
+  (use-package php-mode
+    :ensure t)
 #+end_src
 
 * EXWM

@@ -7,6 +7,8 @@
 		c-electric-delete-forward
 		c-electric-paren
 		c-electric-semi&comma
+		c-electric-slash
+		c-electric-star
 		c-indent-line-or-region
 		end-of-visual-line
 		helm-M-x

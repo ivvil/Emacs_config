@@ -583,7 +583,14 @@
 
 (use-package svelte-mode :ensure t)
 
-;; (use-package astro-ts-mode :ensure t)
+(use-package web-mode
+  :ensure t)
+
+;; ASTRO
+(define-derived-mode astro-mode web-mode "astro")
+(setq auto-mode-alist
+      (append '((".*\\.astro\\'" . astro-mode))
+              auto-mode-alist))
 
 (add-hook 'js-mode-hook 'lsp)
 
@@ -640,13 +647,15 @@
 
 (use-package ccls
 	:ensure t)
-(setq ccls-executable "/run/current-system/sw/bin/ccls")
 
 (require 'dap-lldb)
 (require 'dap-cpptools)
 (require 'dap-gdb-lldb)
 
 (add-hook 'csharp-mode-hook 'lsp)
+
+(use-package php-mode
+  :ensure t)
 
 ;;  ;;;; Code Completion
 
