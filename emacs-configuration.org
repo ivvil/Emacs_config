@@ -895,6 +895,7 @@ Pakcages for other languages and hooks
 
 #+begin_src emacs-lisp
   (add-hook 'js-mode-hook 'lsp)
+  (use-package typescript-mode :ensure t)
 
   (require 'ob-js)
 
@@ -976,8 +977,14 @@ Adding better ~JSON~ mode
 ** Nix
 
 #+begin_src emacs-lisp
-  (use-package nix-mode :ensure t)
-  (setf lsp-nix-nil-formatter ["alejandra"])
+  (use-package nix-mode :ensure t :hook (nix-mode . lsp-deferred))
+  (with-eval-after-load 'lsp-mode
+    (lsp-register-client
+     (make-lsp-client :new-connection (lsp-stdio-connection "nixd")
+                      :major-modes '(nix-mode)
+                      :priority 0
+                      :server-id 'nixd)))
+  (setf lsp-nixd-formatting-command ["alejandra"])
 #+end_src
 
 ** Rust
@@ -997,11 +1004,14 @@ Adding better ~JSON~ mode
   (use-package gdscript-mode :ensure t)
 #+end_src
 
-** C++
+** C/C++
 
 #+begin_src emacs-lisp
-  (use-package ccls
-	:ensure t)
+  ;; (use-package ccls
+  ;;   :hook ((c-mode c++-mode objc-mode cuda-mode) .
+  ;;          (lambda () (require 'ccls) (lsp))))
+
+  (setq lsp-disabled-clients '(ccls))
 
   (require 'dap-lldb)
   (require 'dap-cpptools)
