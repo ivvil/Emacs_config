@@ -709,6 +709,20 @@ Add skewer mode for a live server
     (eshell-syntax-highlighting-global-mode +1))
 #+end_src
 
+** Ellama
+
+#+begin_src emacs-lisp 
+  (use-package ellama
+    :ensure t
+    :init
+    (setopt ellama-language "English")
+    (require 'llm-ollama)
+    (setopt ellama-provider
+  		  (make-llm-ollama
+  		   :chat-model "mistral-small" :embedding-model "mistral-small")))
+
+#+end_src
+
 * Language Server Protocol (LSP)
   With above setup done, below we will setup several packages closely related to LSP.
 
@@ -857,7 +871,7 @@ This is the package that handles server installation and session management.
   (use-package lsp-java 
   :ensure t
   :config (add-hook 'java-mode-hook 'lsp))
-  (setq lsp-java-workspace-dir "/home/ivvil/Documentos/Eclipse")
+  ;; (setq lsp-java-workspace-dir "/home/ivvil/Documentos/Eclipse")
   (require 'dap-java)
 #+end_src
 
@@ -915,16 +929,15 @@ Pakcages for other languages and hooks
 
 #+begin_src emacs-lisp
   (use-package ob-typescript
-	:ensure t)
+  	:ensure t)
 
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((typescript . t)
-	 ))
+  	 ))
 
-  (setq org-babel-command:typescript "npx -p typescript -- tsc")
+  ;; (setq org-babel-command:typescript "npx -p typescript -- tsc")
 #+end_src
-
 
 Adding better ~JSON~ mode
 
@@ -1029,6 +1042,7 @@ Adding better ~JSON~ mode
 #+begin_src emacs-lisp 
   (use-package php-mode
     :ensure t)
+  ;;(setq lsp-enabled-clients '(phpactor))
 #+end_src
 
 * EXWM

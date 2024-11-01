@@ -485,6 +485,15 @@
   ;; Enable in all Eshell buffers.
   (eshell-syntax-highlighting-global-mode +1))
 
+(use-package ellama
+  :ensure t
+  :init
+  (setopt ellama-language "English")
+  (require 'llm-ollama)
+  (setopt ellama-provider
+		  (make-llm-ollama
+		   :chat-model "mistral-small" :embedding-model "mistral-small")))
+
 (use-package company :ensure t :init (global-company-mode))
 
 (use-package yasnippet :config (yas-global-mode))
@@ -576,7 +585,7 @@
 (use-package lsp-java 
 :ensure t
 :config (add-hook 'java-mode-hook 'lsp))
-(setq lsp-java-workspace-dir "/home/ivvil/Documentos/Eclipse")
+;; (setq lsp-java-workspace-dir "/home/ivvil/Documentos/Eclipse")
 (require 'dap-java)
 
 (add-hook 'html-mode-hook 'lsp)
@@ -612,7 +621,7 @@
  '((typescript . t)
 	 ))
 
-(setq org-babel-command:typescript "npx -p typescript -- tsc")
+;; (setq org-babel-command:typescript "npx -p typescript -- tsc")
 
 (use-package json-mode :ensure t)
 
@@ -634,7 +643,7 @@
 (use-package markless
 	:ensure t)
 
-(use-package nix-mode :ensure t)
+(use-package nix-mode :ensure t :hook (nix-mode . lsp-deferred))
 (with-eval-after-load 'lsp-mode
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection "nixd")
@@ -666,6 +675,7 @@
 
 (use-package php-mode
   :ensure t)
+;;(setq lsp-enabled-clients '(phpactor))
 
 ;;  ;;;; Code Completion
 

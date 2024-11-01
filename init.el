@@ -40,7 +40,7 @@
  '(package-selected-packages
    '(ac-geiser all-the-icons-dired auto-complete-auctex ccls cdlatex
 			   company-auctex dashboard docker dockerfile-mode
-			   doom-modeline doom-themes elcord envrc
+			   doom-modeline doom-themes elcord ellama envrc
 			   eshell-syntax-highlighting eshell-vterm flycheck-rust
 			   gdscript-mode geiser-guile heaven-and-hell
 			   helm-descbinds helm-lsp helm-swoop helm-tramp hl-todo
