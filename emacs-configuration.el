@@ -650,7 +650,7 @@
                     :major-modes '(nix-mode)
                     :priority 0
                     :server-id 'nixd)))
-(setf lsp-nixd-formatting-command ["alejandra"])
+(setq lsp-nix-nixd-formatting-command ["alejandra"])
 
 (use-package rust-mode :ensure t :hook ((rust-mode . cargo-minor-mode)
 										  (rust-mode . lsp)))

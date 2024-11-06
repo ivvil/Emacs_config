@@ -635,12 +635,21 @@ Add skewer mode for a live server
   ;; :init (minions-mode))
 #+end_src
 
-** Org modern
+** Org
 
 #+begin_src emacs-lisp
   (use-package org-modern
-	:ensure t
-	:init (global-org-modern-mode))
+  	:ensure t
+  	:init (global-org-modern-mode))
+
+  (require 'ox-latex)
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-listings 'minted)
+
+  (setq org-latex-pdf-process
+        '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 #+end_src
 
 ** Org CDLaTeX
@@ -997,7 +1006,7 @@ Adding better ~JSON~ mode
                       :major-modes '(nix-mode)
                       :priority 0
                       :server-id 'nixd)))
-  (setf lsp-nixd-formatting-command ["alejandra"])
+  (setq lsp-nix-nixd-formatting-command ["alejandra"])
 #+end_src
 
 ** Rust
