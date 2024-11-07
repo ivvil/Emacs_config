@@ -732,6 +732,15 @@ Add skewer mode for a live server
 
 #+end_src
 
+** Editor config
+
+#+begin_src emacs-lisp 
+  (use-package editorconfig
+    :ensure t
+    :config
+    (editorconfig-mode 1))
+#+end_src
+
 * Language Server Protocol (LSP)
   With above setup done, below we will setup several packages closely related to LSP.
 
@@ -1052,6 +1061,14 @@ Adding better ~JSON~ mode
   (use-package php-mode
     :ensure t)
   ;;(setq lsp-enabled-clients '(phpactor))
+#+end_src
+
+** Kotlin
+
+#+begin_src emacs-lisp 
+  (use-package kotlin-mode
+    :ensure t
+    :hook (kotlin-mode . lsp-deferred))
 #+end_src
 
 * EXWM

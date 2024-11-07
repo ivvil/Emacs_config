@@ -443,6 +443,15 @@
 	:ensure t
 	:init (global-org-modern-mode))
 
+(require 'ox-latex)
+(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-listings 'minted)
+
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
 (use-package cdlatex
   :ensure t
   :hook (org-mode-hook . turn-on-org-cdlatex))
@@ -493,6 +502,11 @@
   (setopt ellama-provider
 		  (make-llm-ollama
 		   :chat-model "mistral-small" :embedding-model "mistral-small")))
+
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
 
 (use-package company :ensure t :init (global-company-mode))
 
@@ -676,6 +690,10 @@
 (use-package php-mode
   :ensure t)
 ;;(setq lsp-enabled-clients '(phpactor))
+
+(use-package kotlin-mode
+  :ensure t
+  :hook (kotlin-mode . lsp-deferred))
 
 ;;  ;;;; Code Completion
 
