@@ -646,6 +646,19 @@
 (setq inferior-lisp-program "sbcl")
 (add-hook 'common-lisp-hook 'company-mode)
 
+(use-package paredit :ensure t)
+
+(add-hook 'lisp-mode-hook
+		  (lambda ()
+			(paredit-mode t)
+			(turn-on-eldoc-mode)
+			(eldoc-add-command
+			 'paredit-backward-delete
+			 'paredit-close-round)
+			(local-set-key (kbd "RET") 'electrify-return-if-match)
+			(eldoc-add-command 'electrify-return-if-match)
+			(show-paren-mode t)))
+
 (use-package geiser-guile :ensure t)
 (use-package ac-geiser :ensure t)
 

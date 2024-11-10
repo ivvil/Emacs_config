@@ -44,15 +44,15 @@
 			   eshell-syntax-highlighting eshell-vterm flycheck-rust
 			   gdscript-mode geiser-guile heaven-and-hell
 			   helm-descbinds helm-lsp helm-swoop helm-tramp hl-todo
-			   jsdoc json-mode ligature lsp-java lsp-ui magit-todos
-			   markless meson-mode multiple-cursors nix-mode nov
-			   ob-typescript org-modern org-roam page-break-lines
-			   php-mode platformio-mode prettier quickrun
-			   rainbow-delimiters rust-mode skewer-reload-stylesheets
-			   sly smart-compile solo-jazz-theme svelte-mode
-			   treemacs-all-the-icons treemacs-magit
-			   treemacs-projectile typescript-mode undo-tree
-			   use-package-chords web-mode yaml-mode
+			   jsdoc json-mode kotlin-mode ligature lsp-java lsp-ui
+			   magit-todos markless meson-mode multiple-cursors
+			   nix-mode nov ob-typescript org-modern org-roam
+			   page-break-lines paredit php-mode platformio-mode
+			   prettier quickrun rainbow-delimiters rust-mode
+			   skewer-reload-stylesheets sly smart-compile
+			   solo-jazz-theme svelte-mode treemacs-all-the-icons
+			   treemacs-magit treemacs-projectile typescript-mode
+			   undo-tree use-package-chords web-mode yaml-mode
 			   yasnippet-snippets))
  '(safe-local-variable-directories '("/home/ivvil/Proyectos/klim/")))
 (custom-set-faces
