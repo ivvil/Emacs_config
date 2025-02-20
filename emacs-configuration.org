@@ -220,23 +220,23 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
 
 #+BEGIN_SRC emacs-lisp
   (use-package doom-themes
-	:ensure t 
-	:init 
-	(load-theme 'doom-palenight t))
+    :ensure t 
+    :init 
+    (load-theme 'doom-palenight t))
 
   (use-package solo-jazz-theme
-	:ensure t)
+    :ensure t)
 
   (use-package heaven-and-hell
-	:ensure t
-	:init
-	(setq heaven-and-hell-theme-type 'dark)
-	(setq heaven-and-hell-themes
-		  '((light . doom-solarized-light)
-			(dark . doom-solarized-dark-high-contrast)))
-	:hook (after-init . heaven-and-hell-init-hook)
-	:bind (("C-c <f6>" . heaven-and-hell-load-default-theme)
-		   ("<f6>" . heaven-and-hell-toggle-theme)))
+    :ensure t
+    :init
+    (setq heaven-and-hell-theme-type 'dark)
+    (setq heaven-and-hell-themes
+  		'((light . doom-solarized-light)
+  		  (dark . doom-one)))
+    :hook (after-init . heaven-and-hell-init-hook)
+    :bind (("C-c <f6>" . heaven-and-hell-load-default-theme)
+  		 ("<f6>" . heaven-and-hell-toggle-theme)))
 
 #+END_SRC
 
@@ -975,6 +975,27 @@ With frameworks like react, tsx and jsx files need tree sitter for incremental p
 * Other languages
 Pakcages for other languages and hooks
 
+** Ada
+
+#+begin_src emacs-lisp
+  (use-package ada-mode
+    :ensure t)
+
+  (defgroup project-build nil
+    "LSP options for Project"
+    :group 'ada-mode)
+
+  (defcustom project-build-type "Debug"
+    "Controls the type of build of a project.
+     Default is Debug, other choices are Release and Coverage."
+    :type '(choice
+            (const "Debug")
+            (const "Coverage")
+            (const "Release"))
+    :group 'project-build)
+#+end_src
+
+
 ** HTML
 
 #+begin_src emacs-lisp
@@ -1188,6 +1209,17 @@ Adding better ~JSON~ mode
   (use-package kotlin-mode
     :ensure t
     :hook (kotlin-mode . lsp-deferred))
+#+end_src
+
+** Python
+
+#+begin_src emacs-lisp
+  (use-package lsp-python-ms
+    :ensure t
+    :init (setq lsp-python-ms-auto-install-server t)
+    :hook (python-mode . (lambda ()
+                           (require 'lsp-python-ms)
+                           (lsp))))  ; or lsp-deferred
 #+end_src
 
 * EXWM
