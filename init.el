@@ -21,9 +21,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
- '(custom-enabled-themes '(doom-solarized-dark-high-contrast))
+ '(custom-enabled-themes '(doom-solarized-light))
  '(custom-safe-themes
-   '("9013233028d9798f901e5e8efb31841c24c12444d3b6e92580080505d56fd392"
+   '("0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
+	 "9013233028d9798f901e5e8efb31841c24c12444d3b6e92580080505d56fd392"
 	 "10e5d4cc0f67ed5cafac0f4252093d2119ee8b8cb449e7053273453c1a1eb7cc"
 	 "7964b513f8a2bb14803e717e0ac0123f100fb92160dcf4a467f530868ebaae3e"
 	 "c5878086e65614424a84ad5c758b07e9edcf4c513e08a1c5b1533f313d1b17f1"
@@ -32,29 +33,39 @@
 	 "b1acc21dcb556407306eccd73f90eb7d69664380483b18496d9c5ccc5968ab43"
 	 default))
  '(emms-browser-covers '(emms-browser-cache-thumbnail))
+ '(lsp-ada-als-executable "steam-run ada_language_server")
  '(lsp-java-vmargs
    '("-XX:+UseParallelGC" "-XX:GCTimeRatio=4"
 	 "-XX:AdaptiveSizePolicyWeight=90"
 	 "-Dsun.zip.disableMemoryMapping=true" "-Xmx1G" "-Xms100m"
 	 "--enable-preview"))
  '(package-selected-packages
-   '(ac-geiser all-the-icons-dired arduino-mode auto-complete-auctex
-			   cargo-mode ccls cdlatex company-auctex dashboard
-			   doom-modeline doom-themes elcord ellama envrc
+   '(ac-geiser ada-mode all-the-icons-dired arduino-mode
+			   auto-complete-auctex cargo-mode cargo-transient ccls
+			   cdlatex cider company-auctex dashboard doom-modeline
+			   doom-themes elcord ellama envrc
 			   eshell-syntax-highlighting eshell-vterm flycheck-rust
 			   gdscript-mode geiser-guile heaven-and-hell
 			   helm-descbinds helm-lsp helm-swoop helm-tramp hl-todo
-			   jsdoc json-mode kotlin-mode ligature lsp-java lsp-ui
-			   magit-todos markless meson-mode multiple-cursors
-			   nix-mode nov ob-typescript org-modern org-roam
-			   page-break-lines paredit php-mode platformio-mode
-			   prettier quickrun rainbow-delimiters rust-mode
-			   skewer-reload-stylesheets sly smart-compile
-			   solo-jazz-theme svelte-mode treemacs-all-the-icons
-			   treemacs-magit treemacs-projectile typescript-mode
-			   undo-tree use-package-chords web-mode yaml-mode
+			   jsdoc json-mode kotlin-mode ligature lsp-java
+			   lsp-tailwindcss lsp-ui magit-todos markless meson-mode
+			   multiple-cursors nix-mode nov ob-typescript org-modern
+			   org-roam page-break-lines paredit php-mode
+			   platformio-mode prettier quickrun rainbow-delimiters
+			   rust-mode scss-mode skewer-reload-stylesheets sly
+			   smart-compile solo-jazz-theme svelte-mode
+			   treemacs-all-the-icons treemacs-magit
+			   treemacs-projectile twig-mode typescript-mode undo-tree
+			   use-package-chords web-mode yaml-mode
 			   yasnippet-snippets))
- '(safe-local-variable-directories '("/home/ivvil/Proyectos/klim/")))
+ '(safe-local-variable-directories
+   '("/home/ivvil/Documentos/DAW/Desarrollo web entorno servidor I/laravel_base/"
+	 "/home/ivvil/Proyectos/milftp/"
+	 "/home/ivvil/Documentos/DAW/Desarrollo web entorno servidor I/prueba/"
+	 "/home/ivvil/Proyectos/klim/"))
+ '(safe-local-variable-values
+   '((web-mode-indent-style . 2) (web-mode-block-padding . 4)
+	 (web-mode-script-padding . 4) (web-mode-style-padding . 4))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -62,8 +73,8 @@
  ;; If there is more than one, they won't work right.
  )
 
-(set-face-attribute 'default nil :font "CaskaydiaCove Nerd Font-10")
-(set-frame-font "CaskaydiaCove Nerd Font-10" nil t)
+(set-face-attribute 'default nil :font "CaskaydiaCove Nerd Font-11")
+(set-frame-font "CaskaydiaCove Nerd Font-11" nil t)
 
 
 
