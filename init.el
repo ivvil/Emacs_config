@@ -21,18 +21,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
-<<<<<<< HEAD
- '(custom-enabled-themes '(doom-solarized-light))
- '(custom-safe-themes
-   '("0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
-=======
  '(custom-enabled-themes '(doom-one))
  '(custom-safe-themes
    '("0325a6b5eea7e5febae709dab35ec8648908af12cf2d2b569bedc8da0a3a81c1"
 	 "88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e"
 	 "2721b06afaf1769ef63f942bf3e977f208f517b187f2526f0e57c1bd4a000350"
 	 "da75eceab6bea9298e04ce5b4b07349f8c02da305734f7c0c8c6af7b5eaa9738"
->>>>>>> 28e308d (Ada mode)
 	 "9013233028d9798f901e5e8efb31841c24c12444d3b6e92580080505d56fd392"
 	 "10e5d4cc0f67ed5cafac0f4252093d2119ee8b8cb449e7053273453c1a1eb7cc"
 	 "7964b513f8a2bb14803e717e0ac0123f100fb92160dcf4a467f530868ebaae3e"
@@ -49,7 +43,6 @@
 	 "-Dsun.zip.disableMemoryMapping=true" "-Xmx1G" "-Xms100m"
 	 "--enable-preview"))
  '(package-selected-packages
-<<<<<<< HEAD
    '(ac-geiser ada-mode all-the-icons-dired arduino-mode
 			   auto-complete-auctex cargo-mode cargo-transient ccls
 			   cdlatex cider company-auctex dashboard doom-modeline
@@ -76,31 +69,6 @@
  '(safe-local-variable-values
    '((web-mode-indent-style . 2) (web-mode-block-padding . 4)
 	 (web-mode-script-padding . 4) (web-mode-style-padding . 4))))
-=======
-   '(ac-geiser ada-mode all-the-icons-dired apache-mode arduino-mode
-			   auto-complete-auctex cargo-mode ccls cdlatex cider
-			   company-auctex dart-mode dashboard dockerfile-mode
-			   doom-modeline doom-themes elcord ellama envrc
-			   eshell-syntax-highlighting eshell-vterm flycheck-rust
-			   gdscript-mode geiser-guile heaven-and-hell helm-cider
-			   helm-cider-history helm-descbinds helm-lsp helm-swoop
-			   helm-tramp hl-todo jsdoc json-mode kotlin-mode ligature
-			   lsp-java lsp-python-ms lsp-ui lua-mode magit-todos
-			   markless meson-mode multiple-cursors nix-mode nov
-			   ob-typescript org-modern org-present org-roam
-			   page-break-lines paredit php-mode platformio-mode
-			   prettier quickrun rainbow-delimiters rust-mode
-			   skewer-reload-stylesheets sly smart-compile
-			   solo-jazz-theme svelte-mode treemacs-all-the-icons
-			   treemacs-magit treemacs-projectile typescript-mode
-			   undo-tree use-package-chords web-mode yaml-mode
-			   yasnippet-snippets))
- '(safe-local-variable-directories '("/home/ivvil/Proyectos/klim/"))
- '(safe-local-variable-values
-   '((lsp-enabled-clients quote phpactor)
-	 (lsp-phpactor-path . "phpactor")
-	 (lsp-enabled-clients quote (phpactor)))))
->>>>>>> 28e308d (Ada mode)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
