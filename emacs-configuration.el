@@ -152,8 +152,11 @@
 ;;   :ensure t)
 ;; (require 'which-linux-distribution)
 
-(set-face-attribute 'default nil :font "CaskaydiaCove Nerd Font-10")
-(set-frame-font "CaskaydiaCove Nerd Font-10" nil t)
+;; (set-face-attribute 'default nil :font "CaskaydiaCove Nerd Font-10")
+;; (set-frame-font "CaskaydiaCove Nerd Font-10" nil t)
+(setq default-frame-alist '((font . "Jetbrains Mono Semibold-12")
+							(width . 80)
+							(height. 24)))
 
 (use-package doom-themes
 	:ensure t 
@@ -169,7 +172,7 @@
 	(setq heaven-and-hell-theme-type 'dark)
 	(setq heaven-and-hell-themes
 		  '((light . doom-solarized-light)
-			(dark . doom-solarized-dark-high-contrast)))
+			(dark . doom-gruvbox)))
 	:hook (after-init . heaven-and-hell-init-hook)
 	:bind (("C-c <f6>" . heaven-and-hell-load-default-theme)
 		   ("<f6>" . heaven-and-hell-toggle-theme)))
@@ -185,74 +188,20 @@
 )
 
 (use-package ligature
-  :ensure t
   :config
-  ;; Enable the "www" ligature in every possible major mode
-  (ligature-set-ligatures 't '("www"))
-  ;; Enable traditional ligature support in eww-mode, if the
-  ;; `variable-pitch' face supports it
-  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
-  ;; Enable all Cascadia and Fira Code ligatures in programming modes
-  (ligature-set-ligatures 'prog-mode
-						  '(;; == === ==== => =| =>>=>=|=>==>> ==< =/=//=// =~
-							;; =:= =!=
-							("=" (rx (+ (or ">" "<" "|" "/" "~" ":" "!" "="))))
-							;; ;; ;;;
-							(";" (rx (+ ";")))
-							;; && &&&
-							("&" (rx (+ "&")))
-							;; !! !!! !. !: !!. != !== !~
-							("!" (rx (+ (or "=" "!" "\." ":" "~"))))
-							;; ?? ??? ?:  ?=  ?.
-							("?" (rx (or ":" "=" "\." (+ "?"))))
-							;; %% %%%
-							("%" (rx (+ "%")))
-							;; |> ||> |||> ||||> |] |} || ||| |-> ||-||
-							;; |->>-||-<<-| |- |== ||=||
-							;; |==>>==<<==<=>==//==/=!==:===>
-							("|" (rx (+ (or ">" "<" "|" "/" ":" "!" "}" "\]"
-											"-" "=" ))))
-							;; \\ \\\ \/
-							("\\" (rx (or "/" (+ "\\"))))
-							;; ++ +++ ++++ +>
-							("+" (rx (or ">" (+ "+"))))
-							;; :: ::: :::: :> :< := :// ::=
-							(":" (rx (or ">" "<" "=" "//" ":=" (+ ":"))))
-							;; // /// //// /\ /* /> /===:===!=//===>>==>==/
-							("/" (rx (+ (or ">"  "<" "|" "/" "\\" "\*" ":" "!"
-											"="))))
-							;; .. ... .... .= .- .? ..= ..<
-							("\." (rx (or "=" "-" "\?" "\.=" "\.<" (+ "\."))))
-							;; -- --- ---- -~ -> ->> -| -|->-->>->--<<-|
-							("-" (rx (+ (or ">" "<" "|" "~" "-"))))
-							;; *> */ *)  ** *** ****
-							("*" (rx (or ">" "/" ")" (+ "*"))))
-							;; www wwww
-							("w" (rx (+ "w")))
-							;; <> <!-- <|> <: <~ <~> <~~ <+ <* <$ </  <+> <*>
-							;; <$> </> <|  <||  <||| <|||| <- <-| <-<<-|-> <->>
-							;; <<-> <= <=> <<==<<==>=|=>==/==//=!==:=>
-							;; << <<< <<<<
-							("<" (rx (+ (or "\+" "\*" "\$" "<" ">" ":" "~"  "!"
-											"-"  "/" "|" "="))))
-							;; >: >- >>- >--|-> >>-|-> >= >== >>== >=|=:=>>
-							;; >> >>> >>>>
-							(">" (rx (+ (or ">" "<" "|" "/" ":" "=" "-"))))
-							;; #: #= #! #( #? #[ #{ #_ #_( ## ### #####
-							("#" (rx (or ":" "=" "!" "(" "\?" "\[" "{" "_(" "_"
-										 (+ "#"))))
-							;; ~~ ~~~ ~=  ~-  ~@ ~> ~~>
-							("~" (rx (or ">" "=" "-" "@" "~>" (+ "~"))))
-							;; __ ___ ____ _|_ __|____|_
-							("_" (rx (+ (or "_" "|"))))
-							;; Fira code: 0xFF 0x12
-							;; ("0" (rx (and "x" (+ (in "A-F" "a-f" "0-9")))))
-							;; Fira code:
-							;; "Fl"  "Tl"  "fi"  "fj"  "fl"  "ft"
-							;; The few not covered by the regexps.
-							"{|"  "[|"  "]#"  "(*"  "}#"  "$>"  "^="))
-  ;; Enables ligature checks globally in all buffers. You can also do it
-  ;; per mode with `ligature-mode'.
+  (ligature-set-ligatures 'prog-mode '("--" "---" "==" "===" "!=" "!==" "=!="
+                              "=:=" "=/=" "<=" ">=" "&&" "&&&" "&=" "++" "+++" "***" ";;" "!!"
+                              "??" "???" "?:" "?." "?=" "<:" ":<" ":>" ">:" "<:<" "<>" "<<<" ">>>"
+                              "<<" ">>" "||" "-|" "_|_" "|-" "||-" "|=" "||=" "##" "###" "####"
+                              "#{" "#[" "]#" "#(" "#?" "#_" "#_(" "#:" "#!" "#=" "^=" "<$>" "<$"
+                              "$>" "<+>" "<+" "+>" "<*>" "<*" "*>" "</" "</>" "/>" "<!--" "<#--"
+                              "-->" "->" "->>" "<<-" "<-" "<=<" "=<<" "<<=" "<==" "<=>" "<==>"
+                              "==>" "=>" "=>>" ">=>" ">>=" ">>-" ">-" "-<" "-<<" ">->" "<-<" "<-|"
+                              "<=|" "|=>" "|->" "<->" "<~~" "<~" "<~>" "~~" "~~>" "~>" "~-" "-~"
+                              "~@" "[||]" "|]" "[|" "|}" "{|" "[<" ">]" "|>" "<|" "||>" "<||"
+                              "|||>" "<|||" "<|>" "..." ".." ".=" "..<" ".?" "::" ":::" ":=" "::="
+                              ":?" ":?>" "//" "///" "/*" "*/" "/=" "//=" "/==" "@_" "__" "???"
+                              "<:<" ";;;"))
   (global-ligature-mode t))
 
 (use-package doom-modeline
@@ -352,10 +301,18 @@
 :bind ("C-c r" . quickrun))
 
 (use-package magit :ensure t)
-;; (use-package magit-todos
-;; 	:ensure t
-;; 	:after magit
-;; 	:config (magit-todos-mode 1))
+(use-package magit-todos
+  :ensure t
+  :after magit
+  :config (magit-todos-mode 1))
+
+
+(setq auth-sources '("~/.authinfo"))
+
+
+(use-package forge
+  :ensure t
+  :after magit)
 (setenv "TERM" "dumb")
 
 (use-package envrc :ensure t
@@ -492,7 +449,7 @@
   :ensure t ;; Install if not already installed.
   :config
   ;; Enable in all Eshell buffers.
-  (eshell-syntax-highlighting-global-mode +1))
+  (eshell-syntax-highlighting-global-mode))
 
 (use-package ellama
   :ensure t
@@ -517,24 +474,49 @@
 (setq ispell-default-dicctionary "es")
 
 (use-package dap-mode
-	:ensure t
-	:after (lsp-mode)
-	:functions dap-hydra/nil
-	:config
-	(require 'dap-java)
-	:bind (:map lsp-mode-map
-		   ("<f5>" . dap-debug)
-		   ("M-<f5>" . dap-hydra))
-	:hook ((dap-mode . dap-ui-mode)
-	  (dap-session-created . (lambda (&_rest) (dap-hydra)))
-	  (dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))
+  :ensure t
+  :after (lsp-mode)
+  :functions dap-hydra/nil
+  :config
+  (require 'dap-java)
+  :bind (:map lsp-mode-map
+			  ("<f5>" . dap-debug)
+			  ("M-<f5>" . dap-hydra))
+  :hook ((dap-mode . dap-ui-mode)
+		 (dap-session-created . (lambda (&_rest) (dap-hydra)))
+		 (dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))
 
 (use-package dap-java :ensure nil)
+(require 'dap-gdb)
+
+(with-eval-after-load 'lsp-rust
+  (require 'dap-cpptools))
+
+(with-eval-after-load 'dap-cpptools
+  ;; Add a template specific for debugging Rust programs.
+  ;; It is used for new projects, where I can M-x dap-edit-debug-template
+  (dap-register-debug-template "Rust::CppTools Run Configuration"
+                               (list :type "cppdbg"
+                                     :request "launch"
+                                     :name "Rust::Run"
+                                     :MIMode "gdb"
+                                     :miDebuggerPath "rust-gdb"
+                                     :environment []
+                                     :program "${workspaceFolder}/target/debug/hello / replace with binary"
+                                     :cwd "${workspaceFolder}"
+                                     :console "external"
+                                     :dap-compilation "cargo build"
+                                     :dap-compilation-dir "${workspaceFolder}")))
+
+(with-eval-after-load 'dap-mode
+  (setq dap-default-terminal-kind "integrated") ;; Make sure that terminal programs open a term for I/O in an Emacs buffer
+  (dap-auto-configure-mode +1))
 
 (use-package lsp-treemacs
 	:after (lsp-mode treemacs)
 	:ensure t
 	:commands lsp-treemacs-errors-list
+	:init (lsp-treemacs-sync-mode 1)
 	:bind (:map lsp-mode-map
 		   ("M-9" . lsp-treemacs-errors-list)))
 (use-package treemacs-projectile
@@ -602,6 +584,74 @@
 ;; (setq lsp-java-workspace-dir "/home/ivvil/Documentos/Eclipse")
 (require 'dap-java)
 
+(use-package treesit
+      :mode (("\\.tsx\\'" . tsx-ts-mode)
+             ("\\.js\\'"  . typescript-ts-mode)
+             ("\\.mjs\\'" . typescript-ts-mode)
+             ("\\.mts\\'" . typescript-ts-mode)
+             ("\\.cjs\\'" . typescript-ts-mode)
+             ("\\.ts\\'"  . typescript-ts-mode)
+             ("\\.jsx\\'" . tsx-ts-mode)
+             ("\\.json\\'" .  json-ts-mode)
+             ("\\.Dockerfile\\'" . dockerfile-ts-mode)
+             ("\\.prisma\\'" . prisma-ts-mode)
+             ;; More modes defined here...
+             )
+      :preface
+      (defun os/setup-install-grammars ()
+        "Install Tree-sitter grammars if they are absent."
+        (interactive)
+        (dolist (grammar
+                 '((css . ("https://github.com/tree-sitter/tree-sitter-css" "v0.20.0"))
+                   (bash "https://github.com/tree-sitter/tree-sitter-bash")
+                   (html . ("https://github.com/tree-sitter/tree-sitter-html" "v0.20.1"))
+                   (javascript . ("https://github.com/tree-sitter/tree-sitter-javascript" "v0.21.2" "src"))
+                   (json . ("https://github.com/tree-sitter/tree-sitter-json" "v0.20.2"))
+                   (python . ("https://github.com/tree-sitter/tree-sitter-python" "v0.20.4"))
+                   (go "https://github.com/tree-sitter/tree-sitter-go" "v0.20.0")
+                   (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+                   (make "https://github.com/alemuller/tree-sitter-make")
+                   (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+                   (cmake "https://github.com/uyha/tree-sitter-cmake")
+                   (c "https://github.com/tree-sitter/tree-sitter-c")
+                   (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+                   (toml "https://github.com/tree-sitter/tree-sitter-toml")
+                   (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "tsx/src"))
+                   (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "typescript/src"))
+                   (yaml . ("https://github.com/ikatyang/tree-sitter-yaml" "v0.5.0"))
+                   (prisma "https://github.com/victorhqc/tree-sitter-prisma")))
+          (add-to-list 'treesit-language-source-alist grammar)
+          ;; Only install `grammar' if we don't already have it
+          ;; installed. However, if you want to *update* a grammar then
+          ;; this obviously prevents that from happening.
+          (unless (treesit-language-available-p (car grammar))
+            (treesit-install-language-grammar (car grammar)))))
+
+      ;; Optional, but recommended. Tree-sitter enabled major modes are
+      ;; distinct from their ordinary counterparts.
+      ;;
+      ;; You can remap major modes with `major-mode-remap-alist'. Note
+      ;; that this does *not* extend to hooks! Make sure you migrate them
+      ;; also
+      (dolist (mapping
+               '((python-mode . python-ts-mode)
+                 (css-mode . css-ts-mode)
+                 (typescript-mode . typescript-ts-mode)
+                 (js-mode . typescript-ts-mode)
+                 (js2-mode . typescript-ts-mode)
+                 (c-mode . c-ts-mode)
+                 (c++-mode . c++-ts-mode)
+                 (c-or-c++-mode . c-or-c++-ts-mode)
+                 (bash-mode . bash-ts-mode)
+                 (css-mode . css-ts-mode)
+                 (json-mode . json-ts-mode)
+                 (js-json-mode . json-ts-mode)
+                 (sh-mode . bash-ts-mode)
+                 (sh-base-mode . bash-ts-mode)))
+        (add-to-list 'major-mode-remap-alist mapping))
+      :config
+      (os/setup-install-grammars))
+
 (add-hook 'html-mode-hook 'lsp)
 
 (use-package svelte-mode :ensure t)
@@ -615,7 +665,13 @@
       (append '((".*\\.astro\\'" . astro-mode))
               auto-mode-alist))
 
+(setq web-mode-enable-engine-detection t)
+
 (add-hook 'js-mode-hook 'lsp)
+(add-hook 'js-ts-mode-hook 'lsp)
+
+(add-to-list 'major-mode-remap-alist '(js-mode . js-ts-mode))
+
 (use-package typescript-mode :ensure t)
 
 (require 'ob-js)
@@ -639,28 +695,39 @@
 
 (use-package json-mode :ensure t)
 
-(add-hook 'scss-mode-hook
-			(lambda () ((skewer-reload-stylesheets-reload-on-save)(skewer-reload-stylesheets-start-editing))))
+;; (add-hook 'scss-mode-hook
+;; 			(lambda () ((skewer-reload-stylesheets-reload-on-save)(skewer-reload-stylesheets-start-editing))))
 
 (use-package sly :ensure t)
 (setq inferior-lisp-program "sbcl")
 (add-hook 'common-lisp-hook 'company-mode)
 
+(load "~/quicklisp/log4sly-setup.el")
+(global-log4sly-mode 1)
+
 (use-package paredit :ensure t)
 
 (add-hook 'lisp-mode-hook
-		  (lambda ()
-			(paredit-mode t)
-			(turn-on-eldoc-mode)
-			(eldoc-add-command
-			 'paredit-backward-delete
-			 'paredit-close-round)
-			(local-set-key (kbd "RET") 'electrify-return-if-match)
-			(eldoc-add-command 'electrify-return-if-match)
-			(show-paren-mode t)))
+  		  (lambda ()
+  			(paredit-mode t)
+  			(turn-on-eldoc-mode)
+  			(eldoc-add-command
+  			 'paredit-backward-delete
+  			 'paredit-close-round)
+  			(local-set-key (kbd "RET") 'electrify-return-if-match)
+  			(eldoc-add-command 'electrify-return-if-match)
+  			(show-paren-mode t)))
 
 (use-package geiser-guile :ensure t)
 (use-package ac-geiser :ensure t)
+
+(use-package cider
+  :ensure t)
+
+;; (add-hook 'clojure-mode-hook
+;; 		  (lambda ()
+;; 			(lsp)
+;; 			(cider)))
 
 (use-package auctex :ensure t :hook (latex-mode . acutex-mode))
 (use-package company-auctex :ensure t)
@@ -679,20 +746,30 @@
                     :server-id 'nixd)))
 (setq lsp-nix-nixd-formatting-command ["alejandra"])
 
-(use-package rust-mode :ensure t :hook ((rust-mode . cargo-minor-mode)
-										  (rust-mode . lsp)))
+(use-package cargo-mode
+  :ensure t)
+
+(use-package cargo-transient
+  :ensure t)
+
+(use-package rust-mode
+  :ensure t
+  :hook ((rust-mode . cargo-minor-mode)
+		 (rust-mode . lsp)))
 (use-package flycheck-rust
-	:ensure t)
+  :ensure t)
+
 (with-eval-after-load 'rust-mode
-	(add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 (use-package gdscript-mode :ensure t)
 
-;; (use-package ccls
-;;   :hook ((c-mode c++-mode objc-mode cuda-mode) .
-;;          (lambda () (require 'ccls) (lsp))))
+(use-package ccls
+  ;; :hook ((c-mode c++-mode objc-mode cuda-mode) .
+  ;;        (lambda () (require 'ccls) (lsp)))
+  )
 
-(setq lsp-disabled-clients '(ccls))
+(setq lsp-disabled-clients '(semgrep-ls))
 
 (require 'dap-lldb)
 (require 'dap-cpptools)
@@ -701,7 +778,8 @@
 (add-hook 'csharp-mode-hook 'lsp)
 
 (use-package php-mode
-  :ensure t)
+  :ensure t
+  :hook (php-mode . lsp-deferred))
 ;;(setq lsp-enabled-clients '(phpactor))
 
 (use-package kotlin-mode

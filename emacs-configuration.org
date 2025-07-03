@@ -210,7 +210,7 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
 #+begin_src emacs-lisp 
   ;; (set-face-attribute 'default nil :font "CaskaydiaCove Nerd Font-10")
   ;; (set-frame-font "CaskaydiaCove Nerd Font-10" nil t)
-  (setq default-frame-alist '((font . "CaskaydiaCove Nerd Font-10")
+  (setq default-frame-alist '((font . "Jetbrains Mono Semibold-12")
   							(width . 80)
   							(height. 24)))
 #+end_src
@@ -220,23 +220,23 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
 
 #+BEGIN_SRC emacs-lisp
   (use-package doom-themes
-    :ensure t 
-    :init 
-    (load-theme 'doom-palenight t))
+  	:ensure t 
+  	:init 
+  	(load-theme 'doom-palenight t))
 
   (use-package solo-jazz-theme
-    :ensure t)
+  	:ensure t)
 
   (use-package heaven-and-hell
-    :ensure t
-    :init
-    (setq heaven-and-hell-theme-type 'dark)
-    (setq heaven-and-hell-themes
-  		'((light . doom-solarized-light)
-  		  (dark . doom-one)))
-    :hook (after-init . heaven-and-hell-init-hook)
-    :bind (("C-c <f6>" . heaven-and-hell-load-default-theme)
-  		 ("<f6>" . heaven-and-hell-toggle-theme)))
+  	:ensure t
+  	:init
+  	(setq heaven-and-hell-theme-type 'dark)
+  	(setq heaven-and-hell-themes
+  		  '((light . doom-solarized-light)
+  			(dark . doom-gruvbox)))
+  	:hook (after-init . heaven-and-hell-init-hook)
+  	:bind (("C-c <f6>" . heaven-and-hell-load-default-theme)
+  		   ("<f6>" . heaven-and-hell-toggle-theme)))
 
 #+END_SRC
 
@@ -261,74 +261,20 @@ If you press F6 key in your keyboard, it should switch between doom-palenight an
 
 #+begin_src emacs-lisp
   (use-package ligature
-    :ensure t
     :config
-    ;; Enable the "www" ligature in every possible major mode
-    (ligature-set-ligatures 't '("www"))
-    ;; Enable traditional ligature support in eww-mode, if the
-    ;; `variable-pitch' face supports it
-    (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
-    ;; Enable all Cascadia and Fira Code ligatures in programming modes
-    (ligature-set-ligatures 'prog-mode
-  						  '(;; == === ==== => =| =>>=>=|=>==>> ==< =/=//=// =~
-  							;; =:= =!=
-  							("=" (rx (+ (or ">" "<" "|" "/" "~" ":" "!" "="))))
-  							;; ;; ;;;
-  							(";" (rx (+ ";")))
-  							;; && &&&
-  							("&" (rx (+ "&")))
-  							;; !! !!! !. !: !!. != !== !~
-  							("!" (rx (+ (or "=" "!" "\." ":" "~"))))
-  							;; ?? ??? ?:  ?=  ?.
-  							("?" (rx (or ":" "=" "\." (+ "?"))))
-  							;; %% %%%
-  							("%" (rx (+ "%")))
-  							;; |> ||> |||> ||||> |] |} || ||| |-> ||-||
-  							;; |->>-||-<<-| |- |== ||=||
-  							;; |==>>==<<==<=>==//==/=!==:===>
-  							("|" (rx (+ (or ">" "<" "|" "/" ":" "!" "}" "\]"
-  											"-" "=" ))))
-  							;; \\ \\\ \/
-  							("\\" (rx (or "/" (+ "\\"))))
-  							;; ++ +++ ++++ +>
-  							("+" (rx (or ">" (+ "+"))))
-  							;; :: ::: :::: :> :< := :// ::=
-  							(":" (rx (or ">" "<" "=" "//" ":=" (+ ":"))))
-  							;; // /// //// /\ /* /> /===:===!=//===>>==>==/
-  							("/" (rx (+ (or ">"  "<" "|" "/" "\\" "\*" ":" "!"
-  											"="))))
-  							;; .. ... .... .= .- .? ..= ..<
-  							("\." (rx (or "=" "-" "\?" "\.=" "\.<" (+ "\."))))
-  							;; -- --- ---- -~ -> ->> -| -|->-->>->--<<-|
-  							("-" (rx (+ (or ">" "<" "|" "~" "-"))))
-  							;; *> */ *)  ** *** ****
-  							("*" (rx (or ">" "/" ")" (+ "*"))))
-  							;; www wwww
-  							("w" (rx (+ "w")))
-  							;; <> <!-- <|> <: <~ <~> <~~ <+ <* <$ </  <+> <*>
-  							;; <$> </> <|  <||  <||| <|||| <- <-| <-<<-|-> <->>
-  							;; <<-> <= <=> <<==<<==>=|=>==/==//=!==:=>
-  							;; << <<< <<<<
-  							("<" (rx (+ (or "\+" "\*" "\$" "<" ">" ":" "~"  "!"
-  											"-"  "/" "|" "="))))
-  							;; >: >- >>- >--|-> >>-|-> >= >== >>== >=|=:=>>
-  							;; >> >>> >>>>
-  							(">" (rx (+ (or ">" "<" "|" "/" ":" "=" "-"))))
-  							;; #: #= #! #( #? #[ #{ #_ #_( ## ### #####
-  							("#" (rx (or ":" "=" "!" "(" "\?" "\[" "{" "_(" "_"
-  										 (+ "#"))))
-  							;; ~~ ~~~ ~=  ~-  ~@ ~> ~~>
-  							("~" (rx (or ">" "=" "-" "@" "~>" (+ "~"))))
-  							;; __ ___ ____ _|_ __|____|_
-  							("_" (rx (+ (or "_" "|"))))
-  							;; Fira code: 0xFF 0x12
-  							;; ("0" (rx (and "x" (+ (in "A-F" "a-f" "0-9")))))
-  							;; Fira code:
-  							;; "Fl"  "Tl"  "fi"  "fj"  "fl"  "ft"
-  							;; The few not covered by the regexps.
-  							"{|"  "[|"  "]#"  "(*"  "}#"  "$>"  "^="))
-    ;; Enables ligature checks globally in all buffers. You can also do it
-    ;; per mode with `ligature-mode'.
+    (ligature-set-ligatures 'prog-mode '("--" "---" "==" "===" "!=" "!==" "=!="
+                                "=:=" "=/=" "<=" ">=" "&&" "&&&" "&=" "++" "+++" "***" ";;" "!!"
+                                "??" "???" "?:" "?." "?=" "<:" ":<" ":>" ">:" "<:<" "<>" "<<<" ">>>"
+                                "<<" ">>" "||" "-|" "_|_" "|-" "||-" "|=" "||=" "##" "###" "####"
+                                "#{" "#[" "]#" "#(" "#?" "#_" "#_(" "#:" "#!" "#=" "^=" "<$>" "<$"
+                                "$>" "<+>" "<+" "+>" "<*>" "<*" "*>" "</" "</>" "/>" "<!--" "<#--"
+                                "-->" "->" "->>" "<<-" "<-" "<=<" "=<<" "<<=" "<==" "<=>" "<==>"
+                                "==>" "=>" "=>>" ">=>" ">>=" ">>-" ">-" "-<" "-<<" ">->" "<-<" "<-|"
+                                "<=|" "|=>" "|->" "<->" "<~~" "<~" "<~>" "~~" "~~>" "~>" "~-" "-~"
+                                "~@" "[||]" "|]" "[|" "|}" "{|" "[<" ">]" "|>" "<|" "||>" "<||"
+                                "|||>" "<|||" "<|>" "..." ".." ".=" "..<" ".?" "::" ":::" ":=" "::="
+                                ":?" ":?>" "//" "///" "/*" "*/" "/=" "//=" "/==" "@_" "__" "???"
+                                "<:<" ";;;"))
     (global-ligature-mode t))
 #+end_src
 
@@ -499,10 +445,18 @@ We can use quickrun package to execute code (if it has main). E.g. If you have a
 A VC plugin that has github integrations
 #+begin_src emacs-lisp
   (use-package magit :ensure t)
-  ;; (use-package magit-todos
-  ;; 	:ensure t
-  ;; 	:after magit
-  ;; 	:config (magit-todos-mode 1))
+  (use-package magit-todos
+    :ensure t
+    :after magit
+    :config (magit-todos-mode 1))
+
+
+  (setq auth-sources '("~/.authinfo"))
+
+
+  (use-package forge
+    :ensure t
+    :after magit)
   (setenv "TERM" "dumb")
 #+end_src
 
@@ -718,7 +672,7 @@ Add skewer mode for a live server
     :ensure t ;; Install if not already installed.
     :config
     ;; Enable in all Eshell buffers.
-    (eshell-syntax-highlighting-global-mode +1))
+    (eshell-syntax-highlighting-global-mode))
 #+end_src
 
 ** Ellama
@@ -777,19 +731,43 @@ Emacs Debug Adapter Protocol aka DAP Mode allows us to debug your program. Below
 
 #+begin_src emacs-lisp
   (use-package dap-mode
-	:ensure t
-	:after (lsp-mode)
-	:functions dap-hydra/nil
-	:config
-	(require 'dap-java)
-	:bind (:map lsp-mode-map
-		   ("<f5>" . dap-debug)
-		   ("M-<f5>" . dap-hydra))
-	:hook ((dap-mode . dap-ui-mode)
-	  (dap-session-created . (lambda (&_rest) (dap-hydra)))
-	  (dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))
+    :ensure t
+    :after (lsp-mode)
+    :functions dap-hydra/nil
+    :config
+    (require 'dap-java)
+    :bind (:map lsp-mode-map
+  			  ("<f5>" . dap-debug)
+  			  ("M-<f5>" . dap-hydra))
+    :hook ((dap-mode . dap-ui-mode)
+  		 (dap-session-created . (lambda (&_rest) (dap-hydra)))
+  		 (dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))
 
   (use-package dap-java :ensure nil)
+  (require 'dap-gdb)
+
+  (with-eval-after-load 'lsp-rust
+    (require 'dap-cpptools))
+
+  (with-eval-after-load 'dap-cpptools
+    ;; Add a template specific for debugging Rust programs.
+    ;; It is used for new projects, where I can M-x dap-edit-debug-template
+    (dap-register-debug-template "Rust::CppTools Run Configuration"
+                                 (list :type "cppdbg"
+                                       :request "launch"
+                                       :name "Rust::Run"
+                                       :MIMode "gdb"
+                                       :miDebuggerPath "rust-gdb"
+                                       :environment []
+                                       :program "${workspaceFolder}/target/debug/hello / replace with binary"
+                                       :cwd "${workspaceFolder}"
+                                       :console "external"
+                                       :dap-compilation "cargo build"
+                                       :dap-compilation-dir "${workspaceFolder}")))
+
+  (with-eval-after-load 'dap-mode
+    (setq dap-default-terminal-kind "integrated") ;; Make sure that terminal programs open a term for I/O in an Emacs buffer
+    (dap-auto-configure-mode +1))
 #+end_src
 
 ** Treemacs
@@ -1033,6 +1011,10 @@ Pakcages for other languages and hooks
 
 #+begin_src emacs-lisp
   (add-hook 'js-mode-hook 'lsp)
+  (add-hook 'js-ts-mode-hook 'lsp)
+
+  (add-to-list 'major-mode-remap-alist '(js-mode . js-ts-mode))
+
   (use-package typescript-mode :ensure t)
 
   (require 'ob-js)
@@ -1116,6 +1098,12 @@ Adding better ~JSON~ mode
 #+begin_src emacs-lisp 
   (use-package cider
     :ensure t)
+
+  ;; (add-hook 'clojure-mode-hook
+  ;; 		  (lambda ()
+  ;; 			(lsp)
+  ;; 			(cider)))
+
 #+end_src
 
 ** Latex
@@ -1181,7 +1169,7 @@ Adding better ~JSON~ mode
     ;;        (lambda () (require 'ccls) (lsp)))
     )
 
-  ;; (setq lsp-disabled-clients '(ccls))
+  (setq lsp-disabled-clients '(semgrep-ls))
 
   (require 'dap-lldb)
   (require 'dap-cpptools)

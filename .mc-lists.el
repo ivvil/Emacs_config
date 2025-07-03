@@ -13,12 +13,17 @@
 		end-of-visual-line
 		helm-M-x
 		helm-confirm-and-exit-minibuffer
+		ignore
 		ignore-preserving-kill-region
+		indent-for-tab-command
 		kill-region
 		lsp-execute-code-action
+		lsp-find-definition-mouse
 		lsp-ui-doc--handle-mouse-movement
 		sgml-skip-tag-forward
 		sgml-slash
+		wisi-case-adjust-interactive
+		yaml-electric-backspace
 		))
 
 (setq mc/cmds-to-run-once
