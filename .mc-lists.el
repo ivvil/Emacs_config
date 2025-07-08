@@ -20,6 +20,8 @@
 		lsp-execute-code-action
 		lsp-find-definition-mouse
 		lsp-ui-doc--handle-mouse-movement
+		paredit-forward-slurp-sexp
+		paredit-open-round
 		sgml-skip-tag-forward
 		sgml-slash
 		wisi-case-adjust-interactive

@@ -220,23 +220,26 @@ Here, I add some basic emacs setup like loading the language, disabling the tool
 
 #+BEGIN_SRC emacs-lisp
   (use-package doom-themes
-  	:ensure t 
-  	:init 
-  	(load-theme 'doom-palenight t))
+    :ensure t 
+    :init 
+    (load-theme 'doom-palenight t))
 
   (use-package solo-jazz-theme
-  	:ensure t)
+    :ensure t)
+
+  (use-package acme-theme
+    :ensure t)
 
   (use-package heaven-and-hell
-  	:ensure t
-  	:init
-  	(setq heaven-and-hell-theme-type 'dark)
-  	(setq heaven-and-hell-themes
-  		  '((light . doom-solarized-light)
-  			(dark . doom-gruvbox)))
-  	:hook (after-init . heaven-and-hell-init-hook)
-  	:bind (("C-c <f6>" . heaven-and-hell-load-default-theme)
-  		   ("<f6>" . heaven-and-hell-toggle-theme)))
+    :ensure t
+    :init
+    (setq heaven-and-hell-theme-type 'dark)
+    (setq heaven-and-hell-themes
+  		'((light . acme)
+  		  (dark . doom-gruvbox)))
+    :hook (after-init . heaven-and-hell-init-hook)
+    :bind (("C-c <f6>" . heaven-and-hell-load-default-theme)
+  		 ("<f6>" . heaven-and-hell-toggle-theme)))
 
 #+END_SRC
 
@@ -1070,11 +1073,16 @@ Adding better ~JSON~ mode
   (load "~/quicklisp/log4sly-setup.el")
   (global-log4sly-mode 1)
 
-  (use-package paredit :ensure t)
+  (use-package paredit
+    :ensure t)
+
+  (use-package sly-quicklisp
+    :ensure t)
 
   (add-hook 'lisp-mode-hook
     		  (lambda ()
     			(paredit-mode t)
+  			(sly-quicklisp-mode)
     			(turn-on-eldoc-mode)
     			(eldoc-add-command
     			 'paredit-backward-delete

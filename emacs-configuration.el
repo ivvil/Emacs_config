@@ -159,23 +159,26 @@
 							(height. 24)))
 
 (use-package doom-themes
-	:ensure t 
-	:init 
-	(load-theme 'doom-palenight t))
+  :ensure t 
+  :init 
+  (load-theme 'doom-palenight t))
 
 (use-package solo-jazz-theme
-	:ensure t)
+  :ensure t)
+
+(use-package acme-theme
+  :ensure t)
 
 (use-package heaven-and-hell
-	:ensure t
-	:init
-	(setq heaven-and-hell-theme-type 'dark)
-	(setq heaven-and-hell-themes
-		  '((light . doom-solarized-light)
-			(dark . doom-gruvbox)))
-	:hook (after-init . heaven-and-hell-init-hook)
-	:bind (("C-c <f6>" . heaven-and-hell-load-default-theme)
-		   ("<f6>" . heaven-and-hell-toggle-theme)))
+  :ensure t
+  :init
+  (setq heaven-and-hell-theme-type 'dark)
+  (setq heaven-and-hell-themes
+		'((light . acme)
+		  (dark . doom-gruvbox)))
+  :hook (after-init . heaven-and-hell-init-hook)
+  :bind (("C-c <f6>" . heaven-and-hell-load-default-theme)
+		 ("<f6>" . heaven-and-hell-toggle-theme)))
 
 (defun my/ansi-colorize-buffer ()
 (let ((buffer-read-only nil))
@@ -652,6 +655,22 @@
       :config
       (os/setup-install-grammars))
 
+(use-package ada-mode
+  :ensure t)
+
+(defgroup project-build nil
+  "LSP options for Project"
+  :group 'ada-mode)
+
+(defcustom project-build-type "Debug"
+  "Controls the type of build of a project.
+   Default is Debug, other choices are Release and Coverage."
+  :type '(choice
+          (const "Debug")
+          (const "Coverage")
+          (const "Release"))
+  :group 'project-build)
+
 (add-hook 'html-mode-hook 'lsp)
 
 (use-package svelte-mode :ensure t)
@@ -705,11 +724,16 @@
 (load "~/quicklisp/log4sly-setup.el")
 (global-log4sly-mode 1)
 
-(use-package paredit :ensure t)
+(use-package paredit
+  :ensure t)
+
+(use-package sly-quicklisp
+  :ensure t)
 
 (add-hook 'lisp-mode-hook
   		  (lambda ()
   			(paredit-mode t)
+			(sly-quicklisp-mode)
   			(turn-on-eldoc-mode)
   			(eldoc-add-command
   			 'paredit-backward-delete
@@ -785,6 +809,13 @@
 (use-package kotlin-mode
   :ensure t
   :hook (kotlin-mode . lsp-deferred))
+
+(use-package lsp-python-ms
+  :ensure t
+  :init (setq lsp-python-ms-auto-install-server t)
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-python-ms)
+                         (lsp))))  ; or lsp-deferred
 
 ;;  ;;;; Code Completion
 

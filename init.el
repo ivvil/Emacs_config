@@ -22,9 +22,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
- '(custom-enabled-themes '(doom-one))
+ '(custom-enabled-themes '(doom-solarized-light))
  '(custom-safe-themes
-   '("0f1341c0096825b1e5d8f2ed90996025a0d013a0978677956a9e61408fcd2c77"
+   '("b1162ee87ca94024dbb677dc40c8d8e5ec02d3ccf505bed683f4aa11604468d0"
+	 "f1c8202c772d1de83eda4765fe21429a528a4fb350a28394d3705fe9678ed1f9"
+	 "0f1341c0096825b1e5d8f2ed90996025a0d013a0978677956a9e61408fcd2c77"
 	 "f1e8339b04aef8f145dd4782d03499d9d716fdc0361319411ac2efc603249326"
 	 "b7a09eb77a1e9b98cafba8ef1bd58871f91958538f6671b22976ea38c2580755"
 	 "691d671429fa6c6d73098fc6ff05d4a14a323ea0a18787daeb93fde0e48ab18b"
@@ -52,19 +54,20 @@
 	 "-Dsun.zip.disableMemoryMapping=true" "-Xmx1G" "-Xms100m"
 	 "--enable-preview"))
  '(package-selected-packages
-   '(ac-geiser ada-mode all-the-icons-dired arduino-mode
+   '(ac-geiser acme-theme ada-mode all-the-icons-dired
 			   auto-complete-auctex cargo-mode cargo-transient ccls
-			   cdlatex cider company-auctex dashboard doom-modeline
-			   doom-themes elcord ellama envrc
-			   eshell-syntax-highlighting eshell-vterm flycheck-rust
-			   forge gdscript-mode geiser-guile heaven-and-hell
-			   helm-descbinds helm-lsp helm-swoop helm-tramp hl-todo
-			   intellij-theme jsdoc json-mode kotlin-mode ligature
-			   lsp-java lsp-tailwindcss lsp-ui magit-todos markless
-			   meson-mode multiple-cursors nix-mode nov ob-typescript
-			   org-modern org-roam page-break-lines paredit php-mode
-			   platformio-mode prettier quickrun rainbow-delimiters
-			   rust-mode scss-mode skewer-reload-stylesheets sly
+			   cdlatex cider company-auctex dashboard docker
+			   dockerfile-mode doom-modeline doom-themes elcord ellama
+			   envrc eshell-syntax-highlighting eshell-vterm
+			   flycheck-rust forge gdscript-mode geiser-guile
+			   heaven-and-hell helm-descbinds helm-lsp helm-swoop
+			   helm-tramp intellij-theme jsdoc json-mode kotlin-mode
+			   ligature lsp-java lsp-python-ms lsp-tailwindcss lsp-ui
+			   magit-todos markless multiple-cursors nix-mode
+			   nofrils-acme-theme ob-typescript org-modern org-roam
+			   page-break-lines paredit php-mode platformio-mode
+			   prettier quickrun rainbow-delimiters rust-mode
+			   scss-mode skewer-reload-stylesheets sly sly-quicklisp
 			   smart-compile solo-jazz-theme svelte-mode
 			   treemacs-all-the-icons treemacs-magit
 			   treemacs-projectile twig-mode typescript-mode undo-tree
