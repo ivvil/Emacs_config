@@ -22,7 +22,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auth-source-save-behavior nil)
- '(custom-enabled-themes '(doom-solarized-light))
+ '(custom-enabled-themes '(acme))
  '(custom-safe-themes
    '("b1162ee87ca94024dbb677dc40c8d8e5ec02d3ccf505bed683f4aa11604468d0"
 	 "f1c8202c772d1de83eda4765fe21429a528a4fb350a28394d3705fe9678ed1f9"
@@ -53,26 +53,7 @@
 	 "-XX:AdaptiveSizePolicyWeight=90"
 	 "-Dsun.zip.disableMemoryMapping=true" "-Xmx1G" "-Xms100m"
 	 "--enable-preview"))
- '(package-selected-packages
-   '(ac-geiser acme-theme ada-mode all-the-icons-dired
-			   auto-complete-auctex cargo-mode cargo-transient ccls
-			   cdlatex cider company-auctex dashboard docker
-			   dockerfile-mode doom-modeline doom-themes elcord ellama
-			   envrc eshell-syntax-highlighting eshell-vterm
-			   flycheck-rust forge gdscript-mode geiser-guile
-			   heaven-and-hell helm-descbinds helm-lsp helm-swoop
-			   helm-tramp intellij-theme jsdoc json-mode kotlin-mode
-			   ligature lsp-java lsp-python-ms lsp-tailwindcss lsp-ui
-			   magit-todos markless multiple-cursors nix-mode
-			   nofrils-acme-theme ob-typescript org-modern org-roam
-			   page-break-lines paredit php-mode platformio-mode
-			   prettier quickrun rainbow-delimiters rust-mode
-			   scss-mode skewer-reload-stylesheets sly sly-quicklisp
-			   smart-compile solo-jazz-theme svelte-mode
-			   treemacs-all-the-icons treemacs-magit
-			   treemacs-projectile twig-mode typescript-mode undo-tree
-			   use-package-chords web-mode yaml-mode
-			   yasnippet-snippets))
+ '(package-selected-packages nil)
  '(safe-local-variable-directories
    '("/home/ivvil/Documentos/DAW/Desarrollo web entorno servidor I/laravel_base/"
 	 "/home/ivvil/Proyectos/milftp/"

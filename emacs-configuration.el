@@ -793,7 +793,7 @@
   ;;        (lambda () (require 'ccls) (lsp)))
   )
 
-(setq lsp-disabled-clients '(semgrep-ls))
+(setq lsp-disabled-clients '(semgrep-ls ccls))
 
 (require 'dap-lldb)
 (require 'dap-cpptools)
@@ -816,6 +816,14 @@
   :hook (python-mode . (lambda ()
                          (require 'lsp-python-ms)
                          (lsp))))  ; or lsp-deferred
+
+(use-package dart-mode
+  :ensure t)
+
+(use-package lsp-dart
+  :ensure t
+  ;; :hook (dart-mode . (lsp))
+  )
 
 ;;  ;;;; Code Completion
 
